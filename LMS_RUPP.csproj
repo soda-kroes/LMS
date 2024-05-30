@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <StartupObject>LMS_RUPP.Program</StartupObject>
+    <ApplicationIcon />
+    <OutputType>WinExe</OutputType>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\font\Anton,Jersey_25\Anton\Anton-Regular.ttf" />
+    <None Include="wwwroot\font\Anton,Jersey_25\Anton\OFL.txt" />
+    <None Include="wwwroot\font\Anton,Jersey_25\Jersey_25\Jersey25-Regular.ttf" />
+    <None Include="wwwroot\font\Anton,Jersey_25\Jersey_25\OFL.txt" />
+    <None Include="wwwroot\font\Jersey25-Regular.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+  </ItemGroup>
+
+</Project>

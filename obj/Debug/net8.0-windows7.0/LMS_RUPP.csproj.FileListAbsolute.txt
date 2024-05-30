@@ -1,0 +1,8 @@
+D:\SODA-IT\Rupp\Project\LMS-Csharp\obj\Debug\net8.0-windows7.0\LMS_RUPP.GeneratedMSBuildEditorConfig.editorconfig
+D:\SODA-IT\Rupp\Project\LMS-Csharp\obj\Debug\net8.0-windows7.0\LMS_RUPP.AssemblyInfoInputs.cache
+D:\SODA-IT\Rupp\Project\LMS-Csharp\obj\Debug\net8.0-windows7.0\LMS_RUPP.AssemblyInfo.cs
+D:\SODA-IT\Rupp\Project\LMS-Csharp\obj\Debug\net8.0-windows7.0\LMS_RUPP.csproj.CoreCompileInputs.cache
+D:\SODA-IT\Rupp\Project\LMS-Csharp\obj\Debug\net8.0-windows7.0\LMS_RUPP.MvcApplicationPartsAssemblyInfo.cache
+D:\SODA-IT\Rupp\Project\LMS-Csharp\obj\Debug\net8.0-windows7.0\LMS_RUPP.RazorAssemblyInfo.cache
+D:\SODA-IT\Rupp\Project\LMS-Csharp\obj\Debug\net8.0-windows7.0\LMS_RUPP.RazorAssemblyInfo.cs
+D:\SODA-IT\Rupp\Project\LMS-Csharp\obj\Debug\net8.0-windows7.0\LMS_RUPP.sourcelink.json

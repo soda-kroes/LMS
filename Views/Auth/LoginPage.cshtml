@@ -1,0 +1,149 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "LoginPage";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - LMS-RUPP</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Jersey+25&display=swap" rel="stylesheet">
+    <!-- Add SweetAlert files -->
+    <link href="~/Assets/Sweetalert/sweetalert2.min.css" rel="stylesheet" />
+    <script src="~/Assets/Sweetalert/sweetalert2.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-center" >
+            <div class="col-sm-6" style="margin-top: 5%; background-color: #f6f6f6; padding-bottom: 20px; padding: 20px; border-radius: 20px; ">
+                <div style="display:flex">
+                    <div>
+                        <img src="~/assets/images/rupp_logo.png" style="height:100px; width:100px;" />
+                    </div>
+                    <div style="margin-top:30px; margin-left:10px;">
+                        <h3 class="fontStyle">RUPP - Library Service</h3>   
+                    </div>
+                </div>
+
+                <div style="margin-bottom:20px">
+                    <div class="txtTitle" style="margin-top:60px;">Wellcome back,</div>
+                    <div class="txtTitle">LOGIN</div>
+                </div>
+                <form class="need-validate" novalidate>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label>Username</label>
+                            <div class="input-group">
+                                <div class="input-group-append">
+                                    <button class="input-group-text" disabled><i class="fa fa-user"></i></button>
+                                </div>
+                                <input type="text" class="form-control" id="txtUser" placeholder="Username" required />
+                                <div class="invalid-feedback">This username field is required.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label>Password</label>
+                            <div class="input-group">
+                                <div class="input-group-append">
+                                    <button class="input-group-text" disabled><i class="fa fa-key"></i></button>
+                                </div>
+                                <input type="password" class="form-control" id="txtPassword" placeholder="Password" required />
+                                <div class="invalid-feedback">This password field is required.</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary form-control" style="margin-top:30px;" type="submit">Login</button>
+                </form>
+
+
+            </div>
+            </div>
+        </div>
+</body>
+</html>
+
+<script type="text/javascript">
+        //sweatalert
+        window.Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: function (toast) {
+                toast.addEventListener('mouseenter', Swal.stopTimer);
+                toast.addEventListener('mouseleave', Swal.resumeTimer);
+            },
+        });
+        // Hold screen to validation
+        var form = document.getElementsByClassName('need-validate');
+        var validation = Array.prototype.filter.call(form, function (forms) {
+            forms.addEventListener('submit', function (event) {
+                if (forms.checkValidity() == false) {
+                    event.preventDefault();
+                }
+                else {
+                    event.preventDefault();
+
+
+                    var username = $('#txtUser').val();
+                    var password = $('#txtPassword').val();
+                    
+
+                    $.ajax({
+                        url: '@Url.Action("CheckLogin","Auth")',
+                        type: "GET",
+                        dataType: "JSON",//OK
+                        data: { Username: username, Password: password },
+                        success: function (response) {
+                            if (response.errCode == 0) {
+                                window.location.replace('@Url.Action("Index","AdminDash")')
+
+                            }
+                            else if (response.errCode == 1) {
+                                Toast.fire({
+                                    icon: 'error',
+                                    title: response.errMsg
+                                })
+                            }
+                            else if (response.errCode == 2) {
+                                Toast.fire({
+                                    icon: 'error',
+                                    title: response.errMsg
+                                })
+                            }
+                            else if (response.errCode == 3) {
+                                Toast.fire({
+                                    icon: 'error',
+                                    title: response.errMsg
+                                })
+                            }
+                            else if (response.errCode == 99999) {
+                                Toast.fire({
+                                    icon: 'error',
+                                    title: response.errMsg
+                                })
+                            }
+                            else if (response.errCode == 4) {
+                                window.location.replace('@Url.Action("ChangeDefaultPassword","Auth")')
+                            }
+                        },
+
+                    });
+                }
+                forms.classList.add('was-validated');
+            }, false);
+        });
+
+
+</script>

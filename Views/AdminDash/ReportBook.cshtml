@@ -1,0 +1,219 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Report Book";
+}
+
+
+
+@*DataTables CSS*@
+<link href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+<link href="~/web/ViewUser.css" rel="stylesheet" />
+@*DataTables JS*@
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+
+
+
+<style>
+    .txtTitle {
+        font-family: "Jersey 25", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        color: black;
+        font-size: 22px;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <!-- Page Heading -->
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <div class="mb-0 text-gray-800"> <img src="~/assets/images/icons8-dashboard-48.png" style="width:25px; height:25px; margin-bottom:5px;" /> <span style="color:grey">Dashboard</span> <i class="fa-solid fa-angles-right" style="color:grey"></i> <span style="color:grey">Report</span></div>
+                <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm text-light" data-target="#idFormMember" data-toggle="modal">
+                    <i class="fa-solid fa-user-plus fa-sm text-white-50"></i> Export Excel
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            Filter
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="table-responsive">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table id="idReportBookView" class="table table-bordered table-sm table-hover" style="width:100%;">
+                                <thead class="text-center">
+                                    <tr>
+                                        <th>No</th>
+                                        <th>USER ID</th>
+                                        <th>BOOK ID</th>
+                                        <th>DATE BORROW</th>
+                                        <th>DATE RETURN</th>
+                                        <th>PURPOSE</th>
+                                        <th>STATUS</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+
+    //GET DATA
+    $('#idReportBookView').DataTable({
+        data: DataReports,
+        columns: [
+            {
+                render: function (data, type, full, meta) { return meta.row + 1; }
+            },
+            { data: "userId" },
+            { data: "bookId" },
+            { data: "dateBorrowStr" },
+            { data: "dateReturnStr" },
+            { data: "purpose" },
+            {
+                data: "statusStr",
+                render: function (data, type, full, meta) {
+                    var colorClass = "";
+                    if (data == "Return") {
+                        colorClass = "badge-success";
+                    } else {
+                        colorClass = "badge-danger";
+                    }
+                    return '<span style="padding:3px;" class="badge ' + colorClass + '">' + data + '</span>';
+                }
+            }
+        ]
+    });
+
+    var table = $('#idReportBookView').DataTable();
+    var DataReports = [];
+    function getData() {
+        // showLoading();
+        $.ajax({
+            url: '@Url.Action("GetBookReport","ReportJsonData")',
+            type: "GET",
+            dataType: "JSON",
+            success: function (response) {
+                if (response.errCode == 0) {
+                    console.log(response);
+                    // hideLoading();
+                    DataReports = [];
+                    DataReports = response.bookReports;
+
+                    table.clear();
+                    table.rows.add(DataReports);
+                    table.draw();
+                } else {
+
+                }
+            }
+        });
+    }
+    getData();
+
+
+
+
+
+    // Hold screen to validation
+    var form = document.getElementsByClassName('need-novalidate-new');
+    var validation = Array.prototype.filter.call(form, function (forms) {
+        forms.addEventListener('submit', function (event) {
+            if (forms.checkValidity() == false) {
+                event.preventDefault();
+            }
+            else {
+                event.preventDefault();
+                var obj = {};
+                obj.IdCard = $('#txtIdCard').val();
+                obj.FirstName = $('#txtFirstName').val();
+                obj.LastName = $('#txtLastName').val();
+                obj.Gender = $('#ddlGender').val();
+                obj.DateOfBirthStr = $('#txtDateOfBirth').val();
+                obj.Email = $('#txtEmail').val();
+                obj.Tell = $('#txtTell').val();
+                obj.Address = $("#txtAddress").val();
+
+                $('#idFormMember').modal('hide');
+                showLoading();
+
+                $.ajax({
+                    url: '@Url.Action("PostMember","MemberJsonData")',
+                    type: "POST",
+                    dataType: "JSON",//OK
+                    data: { objMember: obj },
+                    success: function (response) {
+                        if (response.errCode == 0) {
+                            setTimeout(function () {
+                                hideLoading();
+                                Toast.fire({
+                                    icon: 'success',
+                                    title: response.errMsg
+                                })
+                                getData();
+
+                                // Reset the form
+                                forms.reset();
+                                forms.classList.remove('was-validated');
+                            }, 2000);// Delay modal
+                        }
+                        else if (response.errCode == 1) {
+                            hideLoading();
+                            Toast.fire({
+                                icon: 'error',
+                                title: response.errMsg
+                            })
+                        }
+                        else {
+                            hideLoading();
+                            Toast.fire({
+                                icon: 'error',
+                                title: response.errMsg
+                            })
+                        }
+                    },
+                });
+            }
+            forms.classList.add('was-validated');
+        }, false);
+    });
+
+    //------------------------------------- For Loading -------------------------------
+    function showLoading() {
+        var loadingIndicatorOverlay = document.createElement('div');
+        loadingIndicatorOverlay.classList.add('loading-indicator-overlay');
+
+        var loadingIndicator = document.createElement('div');
+        loadingIndicator.classList.add('loading-indicator');
+
+        var loadingText = document.createElement('div');
+        loadingText.classList.add('loading-text');
+        loadingText.textContent = 'Please wait...';
+
+        loadingIndicatorOverlay.appendChild(loadingIndicator);
+        loadingIndicatorOverlay.appendChild(loadingText);
+        document.body.appendChild(loadingIndicatorOverlay);
+
+        return true;
+    }
+
+    function hideLoading() {
+        var loadingIndicator = document.querySelector('.loading-indicator-overlay');
+        if (loadingIndicator) {
+            loadingIndicator.remove();
+        }
+    }
+
+</script>

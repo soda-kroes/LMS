@@ -1,0 +1,617 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "BorrowBook";
+}
+
+@*DataTables CSS*@
+<link href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+<link href="~/web/ViewUser.css" rel="stylesheet" />
+@*DataTables JS*@
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+
+<link href="~/jquery-ui-1.13.3.custom/jquery-ui.css" rel="stylesheet" />
+<script src="~/jquery-ui-1.13.3.custom/jquery-ui.js"></script>
+
+<script>
+    $(function () {
+        $("#tabs").tabs();
+    });
+</script>
+
+<style>
+    .table-responsive {
+        white-space: nowrap;
+        overflow-x: auto;
+    }
+
+    .txtHead {
+        font-family: "Jersey 25", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        color: black;
+        font-size: 24px;
+    }
+
+    table.table-sm th {
+        font-size: 11px;
+    }
+
+    table.table-sm td {
+        font-size: 12px;
+        text-align: center;
+    }
+
+    .border-image {
+        border: 2px solid #000; /* Set the border width and color */
+        padding: 5px; /* Optional: Add padding around the image */
+    }
+</style>
+<div class="container" style="background-color:white; padding:30px;">
+
+    <div class="row">
+        <div class="col-12">
+            <!-- Page Heading -->
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <div class="mb-0 text-gray-800"> <img src="~/assets/images/icons8-dashboard-48.png" style="width:25px; height:25px; margin-bottom:5px;" /> <span style="color:grey">Dashboard</span> <i class="fa-solid fa-angles-right" style="color:grey"></i> <span style="color:grey">Request</span> <i class="fa-solid fa-angles-right" style="color:grey"></i> <span style="color:grey">Boorow Book</span></div>
+                @*<a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm text-light" data-target="#idFormMember" data-toggle="modal">
+                    <i class="fa-solid fa-user-plus fa-sm text-white-50"></i> New Member
+                </a>*@
+            </div>
+        </div>
+    </div>
+
+     <div class="row">
+        <div class="col-md-12 text-center">
+            <h4 class="txtHead">Request Borrow Book Form</h4>
+            <hr />
+         </div>
+    </div>
+    <form class="need-novalidate-new" novalidate>
+        <div class="card">
+            <div class="card-header" style="background-color:#f3fcff;">
+                <b class="text-dark" style="font-size: 16px;">I. Requestor Information</b>
+            </div>
+            <div class="card-body">
+                <div class="row" style="margin-top:10px;">
+                    <div class="col-sm-3">
+                        <label style="font-weight: normal;">ID Card</label>
+                        <select class="form-control" id="ddlIdCard" required></select>
+                        <div class="invalid-feedback">This Id card field is required.</div>
+                    </div>
+                    <div class="col-sm-3">
+                        <label style="font-weight: normal;">First Name</label>
+                        <input id="txtFirstName" type="text" class="form-control" readonly />
+                    </div>
+                    <div class="col-sm-3">
+                        <label style="font-weight: normal;">Last Name</label>
+                        <input id="txtLastName" type="text" class="form-control" readonly />
+                    </div>
+                    <div class="col-sm-3">
+                        <label style="font-weight: normal;">Gender</label>
+                        <input id="txtGender" type="text" class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="row" style="margin-top:10px;">
+                    <div class="col-sm-3">
+                        <label style="font-weight: normal;">Email</label>
+                        <input id="txtEmail" type="text" class="form-control" readonly />
+                    </div>
+                    <div class="col-sm-3">
+                        <label style="font-weight: normal;">Tell</label>
+                        <input id="txtTell" type="text" class="form-control" readonly />
+                    </div>
+                    <div class="col-sm-3">
+                        <label style="font-weight: normal;">Address</label>
+                        <input id="txtAddress" type="text" class="form-control" readonly />
+                    </div>
+                    <div class="col-sm-3">
+                        <label style="font-weight: normal;">Create Date</label>
+                        <input id="txtCreateDate" type="date" class="form-control" readonly />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card mt-3">
+            <div class="card-header" style="background-color:#f3fcff;">
+                <b class="text-dark" style="font-size: 16px;">II. Service Detail</b>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div id="tabs" style="width:100%">
+                        <ul>
+                            <li><a href="#tabs-1">Current Request</a></li>
+                            <li><a href="#tabs-2">History Request</a></li>
+                        </ul>
+                        <div id="tabs-1">
+                            @*<div class="row" style="margin-left:4px;">
+                                <button class="btn btn-info" data-target="#idFormBook" data-toggle="modal">Add New</button>
+                            </div>*@
+                            <a class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm text-light" data-target="#idFormBook" data-toggle="modal">
+                                <i class="fa-solid fa-user-plus fa-sm text-white-50"></i> Add Book
+                            </a>
+                          
+                            <div class="row mt-3">
+                                <div class="table-responsive" style="overflow-x:hidden; padding:0px 15px;">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table id="idTableCurrentRequest" class="table table-bordered table-sm table-hover" style="width:100%;">
+                                                <thead class="text-center">
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>BOOK ID</th>
+                                                        <th>TITLE</th>
+                                                        <th>AUTHOR</th>
+                                                        <th>TYPE OF BOOK</th>
+                                                        <th>ACTION</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                   
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div id="tabs-2">
+                            <div class="row mt-3">
+                                <div class="table-responsive" style="overflow-x:hidden;">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table id="idTableHistoryRequest" class="table table-bordered table-sm table-hover" style="width:100%;">
+                                                <thead class="text-center">
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>BOOK ID</th>
+                                                        <th>DATE BORROW</th>
+                                                        <th>DATE RETURN</th>
+                                                        <th>PURPOSE</th>
+                                                        <th>STATUS</th>
+                                                       
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-header" style="background-color:#f3fcff;">
+                <b class="text-dark" style="font-size: 16px;">III. Remark</b>
+            </div>
+            <div class="card-body">
+                <div class="row" style="margin-top:10px;">
+                    <div class="col-sm-3">
+                        <label style="font-weight: normal;">Borrow Date</label>
+                        <input id="txtBorrowDate" type="date" class="form-control" required />
+                        <div class="invalid-feedback">This borrow date field is required.</div>
+                    </div>
+                    <div class="col-sm-3">
+                        <label style="font-weight: normal;">Return Date</label>
+                        <input id="txtReturnDate" type="date" class="form-control" required />
+                        <div class="invalid-feedback">This return date field is required.</div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label style="font-weight: normal;">Purpose</label>
+                        <textarea id="txtPurpose" class="form-control" rows="6"></textarea>
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </div>
+        </div>
+
+
+        <div class="modal-footer">
+            <button type="submit" id="btnSubmit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+
+@*----------------------------------------------------------Create Insert PopUp Form----------------------------------------------------------*@
+<div class="modal fade" id="idFormBook" tabindex="-1" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"> <img src="~/assets/images/icons8-add-book-100.png" style="width:30px; height:30px;" /><span class="txtTitle"> Add Book</span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="need-novalidate-book-form" novalidate>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div>
+                                Book Code
+                                <select class="form-control" id="ddlBookCode" required></select>
+                                <div class="invalid-feedback">This book code field is required.</div>
+                            </div>
+                            <div style="margin-top:10px;">
+                                Title
+                                <input id="txtTitle" type="text" class="form-control" readonly />
+                                <div class="invalid-feedback">Title is required</div>
+                            </div>
+                            <div style="margin-top:10px;">
+                                Author
+                                <input id="txtAuthor" type="text" class="form-control" readonly />
+                                <div class="invalid-feedback">Author is required</div>
+                            </div>
+                            <div style="margin-top:10px;">
+                                Type Of Book
+                                <input id="txtTypeOfBook" type="text" class="form-control" readonly />
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div style="margin-top: 30px;">
+                                @*<label>Photo</label>*@
+                                <div class="form-group">
+                                    <label for="legalIdImage">
+                                        <div class="header">
+                                            <img id="legalIdImageDisplay" class="border-image" style="cursor: pointer; height: 200px; width: 200px; border-radius: 10px;" src="" />
+                                        </div>
+                                    </label>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="btnSaveBook" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@*----------------------------------------------------------Create Insert PopUp Form----------------------------------------------------------*@
+
+
+<script type="text/javascript">
+
+    function getAllIDCard() {
+        $.ajax({
+            url: '@Url.Action("GetAllIDCard", "MemberJsonData")',
+            type: "GET",
+            dataType: "JSON",
+            success: function (response) {
+                //console.log(response);
+                var ddlIdCard = $('#ddlIdCard');
+                ddlIdCard.empty();
+
+                var defaultOption = new Option('----- Choose One ------', '');
+                ddlIdCard.append(defaultOption);
+
+                for (var i = 0; i < response.members.length; i++) {
+                    var Data = response.members[i];
+                    var optionValue = Data.idCard;
+                    var option = new Option(optionValue, optionValue);
+                    ddlIdCard.append(option);
+                }
+                ddlIdCard.val('');
+            }
+        });
+    }
+
+    getAllIDCard();
+
+  
+
+    function getMemberByIDcard(idcard) {
+        $.ajax({
+            url: '@Url.Action("GetMemberByIDcard", "MemberJsonData")',
+            type: "POST",
+            dataType: "JSON",
+            data: { IdCard: idcard },
+            success: function (response) {
+                // console.log(response.members[0].firstName);
+                $("#txtFirstName").val(response.members[0].firstName);
+                $("#txtLastName").val(response.members[0].lastName);
+                $("#txtGender").val(response.members[0].gender);
+                $("#txtEmail").val(response.members[0].email);
+                $("#txtTell").val(response.members[0].tell);
+                $("#txtAddress").val(response.members[0].address);
+                $("#txtCreateDate").val(response.members[0].dateOfBirthStr);
+              
+            }
+        });
+    }
+
+
+    //GET DATA
+    $('#idTableHistoryRequest').DataTable({
+        data: Datas,
+        columns: [
+            {
+                render: function (data, type, full, meta) { return meta.row + 1; }
+            },
+            { data: "bookId" },
+            { data: "dateBorrowStr" },
+            { data: "dateReturnStr" },
+            { data: "purpose" },
+
+            {
+                data: "statusStr",
+                render: function (data, type, full, meta) {
+                    var colorClass = "";
+                    if (data == "Borrow") {
+                        colorClass = "badge-success";
+                    } else {
+                        colorClass = "badge-danger";
+                    }
+                    return '<span style="padding:3px;" class="badge ' + colorClass + '">' + data + '</span>';
+                }
+            }
+        ]
+    });
+
+
+    var table = $('#idTableHistoryRequest').DataTable();
+    var Datas = [];
+    function getHistoryRequest(USERID) {
+        $.ajax({
+            url: '@Url.Action("GetHistoryRequest", "MasterData")',
+            type: "GET",
+            dataType: "JSON",
+            data: { UserId: USERID },
+            success: function (response) {
+                if (response.errCode == 0) {
+                    console.log(response);
+                    // hideLoading();
+                    Datas = [];
+                    Datas = response.historyRequests;
+
+                    table.clear();
+                    table.rows.add(Datas);
+                    table.draw();
+                } else {
+
+                }
+              
+            }
+        });
+    }
+
+    //get value typeOfBook
+    var valueOfIDcard;
+    $("#ddlIdCard").change(function () {
+        var selectOptionValue = $(this).val();
+        valueOfIDcard = selectOptionValue;
+        // alert(valueOfIDcard);
+        getMemberByIDcard(valueOfIDcard);
+        getHistoryRequest(valueOfIDcard)
+    });
+
+    function getAllBookId() {
+        $.ajax({
+            url: '@Url.Action("getAllBookId", "BookJsonData")',
+            type: "GET",
+            dataType: "JSON",
+            success: function (response) {
+                //console.log("respoonse: " + response);
+                var ddlBookCode = $('#ddlBookCode');
+                ddlBookCode.empty();
+
+                var defaultOption = new Option('----- Choose One ------', '');
+                defaultOption.disabled = true; // Disable the default option
+                defaultOption.selected = true; // Select the default option
+                ddlBookCode.append(defaultOption);
+
+                for (var i = 0; i < response.books.length; i++) {
+                    var Data = response.books[i];
+                    var optionValue = Data.bookId;
+                    var option = new Option(optionValue, optionValue);
+                    ddlBookCode.append(option);
+                }
+                ddlBookCode.val('');
+            }
+        });
+    }
+    getAllBookId();
+
+
+    //get value bookID
+    var valueBookID;
+    $("#ddlBookCode").change(function () {
+        var selectOptionValue = $(this).val();
+        valueBookID = selectOptionValue;
+        // alert(valueOfIDcard);
+        getBookById(valueBookID);
+    });
+
+
+    function getBookById(bookID) {
+        $.ajax({
+            url: '@Url.Action("GetBookById", "BookJsonData")',
+            type: "POST",
+            dataType: "JSON",
+            data: { BookID: bookID },
+            success: function (response) {
+                 //console.log(response);
+                $("#txtTitle").val(response.books[0].title);
+                $("#txtAuthor").val(response.books[0].author);
+                $("#txtTypeOfBook").val(response.books[0].typeOfBook);;
+                var imageUrl = response.books[0].bookImage;
+                $("#legalIdImageDisplay").attr("src", imageUrl);
+            }
+        });
+    }
+
+
+    var form = document.getElementsByClassName('need-novalidate-book-form');
+    var validation = Array.prototype.filter.call(form, function (forms) {
+        var currentNo = 1; // Initialize the current row number
+
+        forms.addEventListener('submit', function (event) {
+            if (forms.checkValidity() == false) {
+                event.preventDefault();
+            } else {
+                event.preventDefault();
+
+                // Check which button triggered the form submission
+                var submitButtonId = event.submitter.id;
+
+                if (submitButtonId === 'btnSaveBook') {
+                    var obj = {};
+                    obj.BookId = valueBookID;
+                    obj.Title = $('#txtTitle').val();
+                    obj.Author = $('#txtAuthor').val();
+                    obj.TypeOfBook = $('#txtTypeOfBook').val();
+
+                    // Assuming bookData contains the book information you want to append
+                    var bookData = {
+                        No: currentNo, // Use the current row number
+                        BookId: obj.BookId,
+                        Title: obj.Title,
+                        Author: obj.Author,
+                        TypeOfBook: obj.TypeOfBook,
+                        Action: '<button class="btn btn-danger btn-sm delete-book" data-id="' + obj.BookId + '">Delete</button>'
+                    };
+
+                    // Generate the HTML for a new table row with the book data
+                    var newRow = '<tr>' +
+                        '<td>' + bookData.No + '</td>' +
+                        '<td>' + bookData.BookId + '</td>' +
+                        '<td>' + bookData.Title + '</td>' +
+                        '<td>' + bookData.Author + '</td>' +
+                        '<td>' + bookData.TypeOfBook + '</td>' +
+                        '<td>' + bookData.Action + '</td>' +
+                        '</tr>';
+
+                    // Append the new row to the table
+                    $('#idTableCurrentRequest').append(newRow);
+
+                    // Increment the current row number for the next row
+                    currentNo++;
+
+
+                    // Reset the form
+                    forms.reset();
+                    forms.classList.remove('was-validated');
+                    var imageUrl = "";
+                    $("#legalIdImageDisplay").attr("src", imageUrl);
+
+                    $('#idFormBook').modal('hide');
+                }
+            }
+            forms.classList.add('was-validated');
+        }, false);
+    });
+
+    // Event delegation to handle the click event on the "Delete" button
+    $('#idTableCurrentRequest').on('click', '.delete-book', function () {
+        var bookId = $(this).data('id');
+
+        // Remove the row from the table
+        $(this).closest('tr').remove();
+    });
+
+
+    var form = document.getElementsByClassName('need-novalidate-new');
+    var validation = Array.prototype.filter.call(form, function (forms) {
+        var currentNo = 1; // Initialize the current row number
+
+        forms.addEventListener('submit', function (event) {
+            if (forms.checkValidity() == false) {
+                event.preventDefault();
+            } else {
+                event.preventDefault();
+
+                // Check which button triggered the form submission
+                var submitButtonId = event.submitter.id;
+
+                if (submitButtonId === 'btnSubmit') {
+                   
+                    var objArr = []; // Initialize objArr array
+
+                    $('#idTableCurrentRequest tbody tr').each(function () {
+                        var obj = {}; // Create a new empty object for each row
+                        var row = $(this);
+                        var no = row.find('td:eq(0)').text();
+                        var bookId = row.find('td:eq(1)').text();
+                        obj.UserId = $('#ddlIdCard').val();
+                        obj.DateBorrowStr = $('#txtBorrowDate').val();
+                        obj.DateReturnStr = $('#txtReturnDate').val();
+                        obj.Purpose = $("#txtPurpose").val();
+                        obj.BookId = bookId; // Add bookId property to obj
+
+                        objArr.push(obj); // Push obj to objArr
+                    });
+
+                    //console.log(objArr);
+                    //console.log(JSON.stringify({ objRequest: objArr }));
+
+                    showLoading()
+
+                    $.ajax({
+                        url: '@Url.Action("RequestBorrowBook","BookJsonData")',
+                        type: "POST",
+                        dataType: "JSON",
+                        data: JSON.stringify({ objRequest: objArr }), // Convert the object array to a JSON string
+                        contentType: "application/json",
+                        success: function (response) {
+                            if (response.errCode == 0) {
+                                setTimeout(function () {
+                                    hideLoading();
+                                    Toast.fire({
+                                        icon: 'success',
+                                        title: response.errMsg
+                                    })
+
+                                    // Clear the table data
+                                    $('#idTableCurrentRequest tbody').empty();
+
+                                    // Reset the form
+                                    forms.reset();
+                                    forms.classList.remove('was-validated');
+                                }, 2000);// Delay modal
+                            }
+                        },
+                        error: function (error) {
+                            // Handle error response
+                        }
+                    });
+                }
+            }
+            forms.classList.add('was-validated');
+        }, false);
+    });
+
+    //------------------------------------- For Loading -------------------------------
+    function showLoading() {
+        var loadingIndicatorOverlay = document.createElement('div');
+        loadingIndicatorOverlay.classList.add('loading-indicator-overlay');
+
+        var loadingIndicator = document.createElement('div');
+        loadingIndicator.classList.add('loading-indicator');
+
+        var loadingText = document.createElement('div');
+        loadingText.classList.add('loading-text');
+        loadingText.textContent = 'Please wait...';
+
+        loadingIndicatorOverlay.appendChild(loadingIndicator);
+        loadingIndicatorOverlay.appendChild(loadingText);
+        document.body.appendChild(loadingIndicatorOverlay);
+
+        return true;
+    }
+
+    function hideLoading() {
+        var loadingIndicator = document.querySelector('.loading-indicator-overlay');
+        if (loadingIndicator) {
+            loadingIndicator.remove();
+        }
+    }
+</script>

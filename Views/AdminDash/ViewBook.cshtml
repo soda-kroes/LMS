@@ -1,0 +1,349 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "ViewBook";
+}
+@*link data table*@
+
+@*DataTables CSS*@
+<link href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+<link href="~/web/ViewUser.css" rel="stylesheet" />
+@*DataTables JS*@
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+
+<style>
+    .container1 {
+        height: 300px;
+        width: 300px;
+        border-radius: 10px;
+        box-shadow: 4px 4px 30px rgba(0, 0, 0, .2);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0px;
+        gap: 5px;
+        background-color: rgba(0, 110, 255, 0.041);
+    }
+
+    .header {
+        flex: 1;
+        width: 100%;
+        border: 2px dashed royalblue;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+</style>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <!-- Page Heading -->
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <div class="mb-0 text-gray-800"> <img src="~/assets/images/icons8-dashboard-48.png" style="width:25px; height:25px; margin-bottom:5px;" /> Dashboard <i class="fa-solid fa-angles-right"></i> List Books</div>
+                <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm text-light" data-target="#idFormBook" data-toggle="modal">
+                    <i class="fa-solid fa-user-plus fa-sm text-white-50"></i> New Book
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="table-responsive">
+            <div class="row">
+                <div class="col-sm-12">
+                    <table id="idUserView" class="table table-bordered table-sm table-hover" style="width:100%;">
+                        <thead class="text-center">
+                            <tr>
+                                <th>No</th>
+                                <th>BOOK ID</th>
+                                <th>TITLE</th>
+                                <th>AUTHOR</th>
+                                <th>TYPE OF BOOK</th>
+                                <th>PHOTO</th>
+                                <th>ACTION</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@*----------------------------------------------------------Create Insert PopUp Form----------------------------------------------------------*@
+<div class="modal fade" id="idFormBook" tabindex="-1" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"> <img src="~/assets/images/icons8-add-book-100.png" style="width:30px; height:30px;" /><span class="txtTitle"> Add Book</span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="need-novalidate-new" novalidate>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div>
+                                Book Code
+                                <input id="txtBookId" type="text" class="form-control" required />
+                                <div class="invalid-feedback">Book Id is required</div>
+                            </div>
+                            <div style="margin-top:10px;">
+                                Title
+                                <input id="txtTitle" type="text" class="form-control" required />
+                                <div class="invalid-feedback">Title is required</div>
+                            </div>
+                            <div style="margin-top:10px;">
+                                Author
+                                <input id="txtAuthor" type="text" class="form-control" required />
+                                <div class="invalid-feedback">Author is required</div>
+                            </div>
+                            <div style="margin-top:10px;">
+                                Type Of Book
+                                <select class="form-control" id="ddlTypeOfBook"></select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div style="margin-top: 30px;">
+                                @*<label>Photo</label>*@
+                                <div class="form-group">
+                                <label for="legalIdImage">
+                                    <div class="header">                                      
+                                        <img id="legalIdImageDisplay" style="cursor: pointer; height: 200px; width: 200px; border-radius:10px;"  src="~/assets/images/icons8-upload-100.png" />
+                                    </div>
+                                </label>
+                                <input accept="image/png, image/gif, image/jpeg" id="legalIdImage" required style="" type="file">
+                            </div>
+                               
+                            </div>
+                     
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@*----------------------------------------------------------Create Insert PopUp Form----------------------------------------------------------*@
+
+<script type="text/javascript">
+
+
+
+
+     //GET DATA
+    $('#idUserView').DataTable({
+        data: Books,
+        columns: [
+            {
+                render: function (data, type, full, meta) { return meta.row + 1; }
+            },
+            { data: "bookId" },
+            { data: "title" },
+            { data: "author" },
+            { data: "typeOfBook" },
+            {
+                data: "bookImage",
+                render: function (data, type, full, meta) {
+                    return '<img src="' + data + '" alt="Book Image" style="width: 50px; height: 50px;">';
+                }
+            },
+            
+            {
+                render: function (data, type, full, meta) {
+                    return '<a href="#" style="margin-right: 10px; color:#ff4d4d; font-size:14px;" onclick="remove(' + full.bookId + ')"><i class="fas fa-trash"></i></a>' + '<a style="font-size:14px;" href="#" onclick="edit(' + full.bookId + ')"><i class="fa-regular fa-pen-to-square"></i></a>'
+                }
+            }
+        ]
+    });
+
+    var table = $('#idUserView').DataTable();
+    var Books = [];
+    function getData() {
+       // showLoading();
+        $.ajax({
+            url: '@Url.Action("GetBook","BookJsonData")',
+            type: "GET",
+            dataType: "JSON",
+            success: function (response) {
+                if (response.errCode == 0) {
+                    console.log(response);
+                    // hideLoading();
+                    Books = [];
+                    Books = response.books;
+
+                    table.clear();
+                    table.rows.add(Books);
+                    table.draw();
+                } else {
+
+                }
+            }
+        });
+    }
+    getData();
+
+
+    function getTypeOfBook() {
+        $.ajax({
+            url: "/MasterData/GetTypeOfBook",
+            type: "GET",
+            dataType: "JSON",
+            success: function (response) {
+                console.log(response);
+                var ddlTypeOfBook = $('#ddlTypeOfBook');
+                ddlTypeOfBook.empty();
+
+                var defaultOption = new Option('----- Choose One ------', '');
+                defaultOption.disabled = true; // Disable the option
+                defaultOption.selected = true; // Select the option
+                ddlTypeOfBook.append(defaultOption);
+
+                for (var i = 0; i < response.typeOfBooks.length; i++) {
+                    var typeofBook = response.typeOfBooks[i];
+                    var optionValue =  typeofBook.id;
+                    var option = new Option(typeofBook.name, optionValue);
+                    ddlTypeOfBook.append(option);
+                }
+                ddlTypeOfBook.val('');
+            }
+        });
+    }
+
+    getTypeOfBook();
+
+    //get value typeOfBook
+    var value_type_of_book;
+    $("#ddlTypeOfBook").change(function () {
+        var selectOptionValue = $(this).val();
+        value_type_of_book = selectOptionValue;
+        //alert(value_type_of_book);
+    });
+
+    //--------------------{hadle file image}-----------
+    var images = null;
+
+    function ReadImages(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#legalIdImageDisplay').attr('src', e.target.result);
+                images = e.target.result;
+                //alert(images);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $('#legalIdImage').change(function () {
+        ReadImages(this);
+    });
+
+      // Hold screen to validation
+    var form = document.getElementsByClassName('need-novalidate-new');
+    var validation = Array.prototype.filter.call(form, function (forms) {
+        forms.addEventListener('submit', function (event) {
+            if (forms.checkValidity() == false) {
+                event.preventDefault();
+            }
+            else {
+                event.preventDefault();
+
+                var obj = {};
+                obj.BookId = $('#txtBookId').val();
+                obj.Title = $('#txtTitle').val();
+                obj.Author = $('#txtAuthor').val();
+                obj.TypeOfBookId = value_type_of_book;
+                obj.BookImage = images;
+
+
+                $('#idFormBook').modal('hide');
+                showLoading();
+
+                $.ajax({
+                    url: '@Url.Action("PostBook","BookJsonData")',
+                    type: "POST",
+                    dataType: "JSON",//OK
+                    data: { book: obj },
+                    success: function (response) {
+                        if (response.errCode == 0) {
+                            setTimeout(function () {
+                                hideLoading();
+                                Toast.fire({
+                                    icon: 'success',
+                                    title: response.errMsg
+                                })
+                                getData();
+
+
+                                // Reset the form
+                                forms.reset();
+                                forms.classList.remove('was-validated');
+                            }, 2000);// Delay modal
+                        }
+                        else if (response.errCode == 1) {
+                            hideLoading();
+                            Toast.fire({
+                                icon: 'error',
+                                title: response.errMsg
+                            })
+                        }
+                        else {
+                            hideLoading();
+                            Toast.fire({
+                                icon: 'error',
+                                title: response.errMsg
+                            })
+                        }
+                    },
+                });
+            }
+            forms.classList.add('was-validated');
+        }, false);
+    });
+
+
+
+
+
+
+    //------------------------------------- For Loading -------------------------------
+    function showLoading() {
+        var loadingIndicatorOverlay = document.createElement('div');
+        loadingIndicatorOverlay.classList.add('loading-indicator-overlay');
+
+        var loadingIndicator = document.createElement('div');
+        loadingIndicator.classList.add('loading-indicator');
+
+        var loadingText = document.createElement('div');
+        loadingText.classList.add('loading-text');
+        loadingText.textContent = 'Please wait...';
+
+        loadingIndicatorOverlay.appendChild(loadingIndicator);
+        loadingIndicatorOverlay.appendChild(loadingText);
+        document.body.appendChild(loadingIndicatorOverlay);
+
+        return true;
+    }
+
+    function hideLoading() {
+        var loadingIndicator = document.querySelector('.loading-indicator-overlay');
+        if (loadingIndicator) {
+            loadingIndicator.remove();
+        }
+    }
+
+</script>

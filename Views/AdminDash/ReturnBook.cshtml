@@ -1,0 +1,306 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "ReturnBook";
+}
+
+@*DataTables CSS*@
+<link href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+<link href="~/web/ViewUser.css" rel="stylesheet" />
+@*DataTables JS*@
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+
+<link href="~/jquery-ui-1.13.3.custom/jquery-ui.css" rel="stylesheet" />
+<script src="~/jquery-ui-1.13.3.custom/jquery-ui.js"></script>
+
+<script>
+    $(function () {
+        $("#tabs").tabs();
+    });
+</script>
+
+<style>
+    .table-responsive {
+        white-space: nowrap;
+        overflow-x: auto;
+    }
+
+    .txtHead {
+        font-family: "Jersey 25", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        color: black;
+        font-size: 24px;
+    }
+
+    table.table-sm th {
+        font-size: 11px;
+    }
+
+    table.table-sm td {
+        font-size: 12px;
+        text-align: center;
+    }
+
+    .border-image {
+        border: 2px solid #000; /* Set the border width and color */
+        padding: 5px; /* Optional: Add padding around the image */
+    }
+</style>
+<div class="container" style="background-color:white; padding:30px;">
+    <div class="row">
+        <div class="col-12">
+            <!-- Page Heading -->
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <div class="mb-0 text-gray-800"> <img src="~/assets/images/icons8-dashboard-48.png" style="width:25px; height:25px; margin-bottom:5px;" /> <span style="color:grey">Dashboard</span> <i class="fa-solid fa-angles-right" style="color:grey"></i> <span style="color:grey">Request</span> <i class="fa-solid fa-angles-right" style="color:grey"></i> <span style="color:grey">Return Book</span></div>
+                @*<a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm text-light" data-target="#idFormMember" data-toggle="modal">
+                <i class="fa-solid fa-user-plus fa-sm text-white-50"></i> New Member
+                </a>*@
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h4 class="txtHead">Request Return Book Form</h4>
+            <hr />
+        </div>
+    </div>
+    <form class="need-novalidate-new" novalidate>
+        <div class="card">
+            <div class="card-header" style="background-color:#f3fcff;">
+                <b class="text-dark" style="font-size: 16px;">I. Requestor Information</b>
+            </div>
+            <div class="card-body">
+                <div class="row" style="margin-top:10px;">
+                    <div class="col-sm-3">
+                        <label style="font-weight: normal;">ID Card</label>
+                        <select class="form-control" id="ddlIdCard" required></select>
+                        <div class="invalid-feedback">This Id card field is required.</div>
+                    </div>
+                    <div class="col-sm-3">
+                        <label style="font-weight: normal;">First Name</label>
+                        <input id="txtFirstName" type="text" class="form-control" readonly />
+                    </div>
+                    <div class="col-sm-3">
+                        <label style="font-weight: normal;">Last Name</label>
+                        <input id="txtLastName" type="text" class="form-control" readonly />
+                    </div>
+                    <div class="col-sm-3">
+                        <label style="font-weight: normal;">Gender</label>
+                        <input id="txtGender" type="text" class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="row" style="margin-top:10px;">
+                    <div class="col-sm-3">
+                        <label style="font-weight: normal;">Email</label>
+                        <input id="txtEmail" type="text" class="form-control" readonly />
+                    </div>
+                    <div class="col-sm-3">
+                        <label style="font-weight: normal;">Tell</label>
+                        <input id="txtTell" type="text" class="form-control" readonly />
+                    </div>
+                    <div class="col-sm-3">
+                        <label style="font-weight: normal;">Address</label>
+                        <input id="txtAddress" type="text" class="form-control" readonly />
+                    </div>
+                    <div class="col-sm-3">
+                        <label style="font-weight: normal;">Create Date</label>
+                        <input id="txtCreateDate" type="date" class="form-control" readonly />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card mt-3">
+            <div class="card-header" style="background-color:#f3fcff;">
+                <b class="text-dark" style="font-size: 16px;">II. Service Detail</b>
+            </div>
+            <div class="card-body">
+              
+
+                    <div class="row mt-3">
+                        <div class="table-responsive" style="overflow-x:hidden; padding:0px 15px;">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table id="idTableBorrowRBook" class="table table-bordered table-sm table-hover" style="width:100%;">
+                                        <thead class="text-center">
+                                            <tr>
+                                                <th>No</th>
+                                                <th>BOOK ID</th>
+                                                <th>DATE BORROW</th>
+                                                <th>DATE RETURN</th>
+                                                <th>PURPOSE</th>
+                                                <th>ACTION</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+          @*  <div class="modal-footer">
+                <button type="submit" id="btnSubmit" class="btn btn-primary">Submit</button>
+            </div>*@
+    </form>
+</div>
+
+
+
+<script type="text/javascript">
+
+    function getAllIDCard() {
+        $.ajax({
+            url: '@Url.Action("GetAllIDCard", "MemberJsonData")',
+            type: "GET",
+            dataType: "JSON",
+            success: function (response) {
+                //console.log(response);
+                var ddlIdCard = $('#ddlIdCard');
+                ddlIdCard.empty();
+
+                var defaultOption = new Option('----- Choose One ------', '');
+                ddlIdCard.append(defaultOption);
+
+                for (var i = 0; i < response.members.length; i++) {
+                    var Data = response.members[i];
+                    var optionValue = Data.idCard;
+                    var option = new Option(optionValue, optionValue);
+                    ddlIdCard.append(option);
+                }
+                ddlIdCard.val('');
+            }
+        });
+    }
+    getAllIDCard();
+
+    function getMemberByIDcard(idcard) {
+        $.ajax({
+            url: '@Url.Action("GetMemberByIDcard", "MemberJsonData")',
+            type: "POST",
+            dataType: "JSON",
+            data: { IdCard: idcard },
+            success: function (response) {
+                // console.log(response.members[0].firstName);
+                $("#txtFirstName").val(response.members[0].firstName);
+                $("#txtLastName").val(response.members[0].lastName);
+                $("#txtGender").val(response.members[0].gender);
+                $("#txtEmail").val(response.members[0].email);
+                $("#txtTell").val(response.members[0].tell);
+                $("#txtAddress").val(response.members[0].address);
+                $("#txtCreateDate").val(response.members[0].dateOfBirthStr);
+
+            }
+        });
+    }
+
+
+   
+    //get value typeOfBook
+    var valueOfIDcard;
+    $("#ddlIdCard").change(function () {
+        var selectOptionValue = $(this).val();
+        valueOfIDcard = selectOptionValue;
+        // alert(valueOfIDcard);
+        getMemberByIDcard(valueOfIDcard);
+        getBookBorrowByUserId(valueOfIDcard);
+
+    });
+
+
+ 
+
+    //GET DATA
+    $('#idTableBorrowRBook').DataTable({
+        data: BookDatas,
+        columns: [
+            {
+                render: function (data, type, full, meta) { return meta.row + 1; }
+            },
+            { data: "bookId" },
+            { data: "dateBorrowStr" },
+            { data: "dateReturnStr" },
+            { data: "purpose" },
+            {
+                render: function (data, type, full, meta) {
+                    return '<a href="#" class="btn btn-sm btn-success" style="margin-right: 10px; color:white; font-size:14px;" onclick="returnBook(' + full.bookId + ')"><i class="fa-solid fa-rotate-left"></i> Return Now</a>';
+                }
+            }
+        ]
+    });
+
+    var table = $('#idTableBorrowRBook').DataTable();
+    var BookDatas = [];
+    function getBookBorrowByUserId(idcard) {
+        $.ajax({
+            url: '@Url.Action("GetBookBorrowByUserId", "BookJsonData")',
+            type: "POST",
+            dataType: "JSON",
+            data: { UserId: idcard },
+            success: function (response) {
+                 console.log(response);
+                 if(response.errCode == 0){
+                     BookDatas = [];
+                     BookDatas = response.requests;
+                     
+                     table.clear();
+                     table.rows.add(BookDatas);
+                    table.draw();
+                 }
+            }
+        });
+    }
+
+    function returnBook(BookId){
+        $.ajax({
+            url: '@Url.Action("ReturnBook", "BookJsonData")',
+            type: "POST",
+            dataType: "JSON",
+            data: { BookId: BookId, UserId: valueOfIDcard },
+            success: function (response) {
+                console.log(response);
+                if (response.errCode == 0) {
+                    alert(1);
+                    // Clear the existing data in the table
+                    getBookBorrowByUserId(valueOfIDcard)
+
+                }
+            }
+        });
+    }
+
+
+   
+
+
+
+
+    //------------------------------------- For Loading -------------------------------
+    function showLoading() {
+        var loadingIndicatorOverlay = document.createElement('div');
+        loadingIndicatorOverlay.classList.add('loading-indicator-overlay');
+
+        var loadingIndicator = document.createElement('div');
+        loadingIndicator.classList.add('loading-indicator');
+
+        var loadingText = document.createElement('div');
+        loadingText.classList.add('loading-text');
+        loadingText.textContent = 'Please wait...';
+
+        loadingIndicatorOverlay.appendChild(loadingIndicator);
+        loadingIndicatorOverlay.appendChild(loadingText);
+        document.body.appendChild(loadingIndicatorOverlay);
+
+        return true;
+    }
+
+    function hideLoading() {
+        var loadingIndicator = document.querySelector('.loading-indicator-overlay');
+        if (loadingIndicator) {
+            loadingIndicator.remove();
+        }
+    }
+</script>

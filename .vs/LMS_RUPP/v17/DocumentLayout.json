@@ -1,0 +1,427 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|d:\\soda-it\\rupp\\project\\lms-csharp\\views\\admindash\\borrowbook.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|solutionrelative:views\\admindash\\borrowbook.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|d:\\soda-it\\rupp\\project\\lms-csharp\\views\\shared\\_adminlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|solutionrelative:views\\shared\\_adminlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|d:\\soda-it\\rupp\\project\\lms-csharp\\controllers\\memberjsondatacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|solutionrelative:controllers\\memberjsondatacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|d:\\soda-it\\rupp\\project\\lms-csharp\\controllers\\admindashcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|solutionrelative:controllers\\admindashcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|d:\\soda-it\\rupp\\project\\lms-csharp\\views\\admindash\\viewmember.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|solutionrelative:views\\admindash\\viewmember.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|d:\\soda-it\\rupp\\project\\lms-csharp\\views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|solutionrelative:views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|d:\\soda-it\\rupp\\project\\lms-csharp\\views\\admindash\\reportbook.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|solutionrelative:views\\admindash\\reportbook.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|d:\\soda-it\\rupp\\project\\lms-csharp\\views\\admindash\\returnbook.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|solutionrelative:views\\admindash\\returnbook.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|d:\\soda-it\\rupp\\project\\lms-csharp\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|d:\\soda-it\\rupp\\project\\lms-csharp\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|solutionrelative:views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|d:\\soda-it\\rupp\\project\\lms-csharp\\views\\admindash\\viewbook.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|solutionrelative:views\\admindash\\viewbook.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|d:\\soda-it\\rupp\\project\\lms-csharp\\views\\user\\viewuser.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|solutionrelative:views\\user\\viewuser.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|d:\\soda-it\\rupp\\project\\lms-csharp\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|d:\\soda-it\\rupp\\project\\lms-csharp\\controllers\\masterdatacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|solutionrelative:controllers\\masterdatacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|d:\\soda-it\\rupp\\project\\lms-csharp\\models\\response\\userresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|solutionrelative:models\\response\\userresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|d:\\soda-it\\rupp\\project\\lms-csharp\\models\\viewmodels\\clsuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|solutionrelative:models\\viewmodels\\clsuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|d:\\soda-it\\rupp\\project\\lms-csharp\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|solutionrelative:models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|d:\\soda-it\\rupp\\project\\lms-csharp\\models\\response\\clsmemberresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|solutionrelative:models\\response\\clsmemberresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|d:\\soda-it\\rupp\\project\\lms-csharp\\models\\response\\clsbookresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|solutionrelative:models\\response\\clsbookresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|d:\\soda-it\\rupp\\project\\lms-csharp\\models\\viewmodels\\clsmember.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|solutionrelative:models\\viewmodels\\clsmember.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|d:\\soda-it\\rupp\\project\\lms-csharp\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|d:\\soda-it\\rupp\\project\\lms-csharp\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|solutionrelative:controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|d:\\soda-it\\rupp\\project\\lms-csharp\\models\\dbconnection\\clssqlconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|solutionrelative:models\\dbconnection\\clssqlconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|d:\\soda-it\\rupp\\project\\lms-csharp\\lms_rupp.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{15BDCC05-8B2B-422D-967B-3C2006D93C09}|LMS_RUPP.csproj|solutionrelative:lms_rupp.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Error.cshtml",
+              "DocumentMoniker": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Views\\Shared\\Error.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\Error.cshtml",
+              "ToolTip": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Views\\Shared\\Error.cshtml",
+              "RelativeToolTip": "Views\\Shared\\Error.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-24T09:41:45.778Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ReturnBook.cshtml",
+              "DocumentMoniker": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Views\\AdminDash\\ReturnBook.cshtml",
+              "RelativeDocumentMoniker": "Views\\AdminDash\\ReturnBook.cshtml",
+              "ToolTip": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Views\\AdminDash\\ReturnBook.cshtml",
+              "RelativeToolTip": "Views\\AdminDash\\ReturnBook.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-24T09:41:39.677Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "_AdminLayout.cshtml",
+              "DocumentMoniker": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Views\\Shared\\_AdminLayout.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_AdminLayout.cshtml",
+              "ToolTip": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Views\\Shared\\_AdminLayout.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_AdminLayout.cshtml",
+              "ViewState": "AQIAABcAAAAAAAAAAAAkwCoAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-24T06:52:20.235Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "BorrowBook.cshtml",
+              "DocumentMoniker": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Views\\AdminDash\\BorrowBook.cshtml",
+              "RelativeDocumentMoniker": "Views\\AdminDash\\BorrowBook.cshtml",
+              "ToolTip": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Views\\AdminDash\\BorrowBook.cshtml",
+              "RelativeToolTip": "Views\\AdminDash\\BorrowBook.cshtml",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAqwBgAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-24T07:28:56.923Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ViewMember.cshtml",
+              "DocumentMoniker": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Views\\AdminDash\\ViewMember.cshtml",
+              "RelativeDocumentMoniker": "Views\\AdminDash\\ViewMember.cshtml",
+              "ToolTip": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Views\\AdminDash\\ViewMember.cshtml",
+              "RelativeToolTip": "Views\\AdminDash\\ViewMember.cshtml",
+              "ViewState": "AQIAABUBAAAAAAAAAAAIwP0AAAAzAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-24T06:54:24.134Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MemberJsonDataController.cs",
+              "DocumentMoniker": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Controllers\\MemberJsonDataController.cs",
+              "RelativeDocumentMoniker": "Controllers\\MemberJsonDataController.cs",
+              "ToolTip": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Controllers\\MemberJsonDataController.cs",
+              "RelativeToolTip": "Controllers\\MemberJsonDataController.cs",
+              "ViewState": "AQIAAJ0AAAAAAAAAAAAkwKgAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-24T06:50:49.405Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AdminDashController.cs",
+              "DocumentMoniker": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Controllers\\AdminDashController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AdminDashController.cs",
+              "ToolTip": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Controllers\\AdminDashController.cs",
+              "RelativeToolTip": "Controllers\\AdminDashController.cs",
+              "ViewState": "AQIAAJ0AAAAAAAAAAAAQwKQAAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-24T06:43:13.462Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-24T09:41:41.768Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "_ValidationScriptsPartial.cshtml",
+              "DocumentMoniker": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ToolTip": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-24T09:41:41.209Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ViewUser.cshtml",
+              "DocumentMoniker": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Views\\User\\ViewUser.cshtml",
+              "RelativeDocumentMoniker": "Views\\User\\ViewUser.cshtml",
+              "ToolTip": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Views\\User\\ViewUser.cshtml",
+              "RelativeToolTip": "Views\\User\\ViewUser.cshtml",
+              "ViewState": "AQIAAMAAAAAAAAAAAAAAANQAAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-24T06:55:23.161Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ReportBook.cshtml",
+              "DocumentMoniker": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Views\\AdminDash\\ReportBook.cshtml",
+              "RelativeDocumentMoniker": "Views\\AdminDash\\ReportBook.cshtml",
+              "ToolTip": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Views\\AdminDash\\ReportBook.cshtml",
+              "RelativeToolTip": "Views\\AdminDash\\ReportBook.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-24T08:17:20.398Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ViewBook.cshtml",
+              "DocumentMoniker": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Views\\AdminDash\\ViewBook.cshtml",
+              "RelativeDocumentMoniker": "Views\\AdminDash\\ViewBook.cshtml",
+              "ToolTip": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Views\\AdminDash\\ViewBook.cshtml",
+              "RelativeToolTip": "Views\\AdminDash\\ViewBook.cshtml",
+              "ViewState": "AQIAANwAAAAAAAAAAAAIwOwAAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-24T07:02:02.834Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "Controllers\\UserController.cs",
+              "ToolTip": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Controllers\\UserController.cs",
+              "RelativeToolTip": "Controllers\\UserController.cs",
+              "ViewState": "AQIAAGYAAAAAAAAAAAAqwHEAAABDAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-24T06:50:50.291Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "MasterDataController.cs",
+              "DocumentMoniker": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Controllers\\MasterDataController.cs",
+              "RelativeDocumentMoniker": "Controllers\\MasterDataController.cs",
+              "ToolTip": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Controllers\\MasterDataController.cs",
+              "RelativeToolTip": "Controllers\\MasterDataController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-24T06:50:48.875Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ErrorViewModel.cs",
+              "DocumentMoniker": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Models\\ErrorViewModel.cs",
+              "RelativeDocumentMoniker": "Models\\ErrorViewModel.cs",
+              "ToolTip": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Models\\ErrorViewModel.cs",
+              "RelativeToolTip": "Models\\ErrorViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-24T07:02:01.741Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ClsUser.cs",
+              "DocumentMoniker": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Models\\ViewModels\\ClsUser.cs",
+              "RelativeDocumentMoniker": "Models\\ViewModels\\ClsUser.cs",
+              "ToolTip": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Models\\ViewModels\\ClsUser.cs",
+              "RelativeToolTip": "Models\\ViewModels\\ClsUser.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-24T07:27:08.247Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "UserResponse.cs",
+              "DocumentMoniker": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Models\\Response\\UserResponse.cs",
+              "RelativeDocumentMoniker": "Models\\Response\\UserResponse.cs",
+              "ToolTip": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Models\\Response\\UserResponse.cs",
+              "RelativeToolTip": "Models\\Response\\UserResponse.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-24T07:27:10.835Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "ClsMember.cs",
+              "DocumentMoniker": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Models\\ViewModels\\ClsMember.cs",
+              "RelativeDocumentMoniker": "Models\\ViewModels\\ClsMember.cs",
+              "ToolTip": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Models\\ViewModels\\ClsMember.cs",
+              "RelativeToolTip": "Models\\ViewModels\\ClsMember.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAAwAYAAAAGAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-24T06:57:18.362Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "ClsMemberResponse.cs",
+              "DocumentMoniker": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Models\\Response\\ClsMemberResponse.cs",
+              "RelativeDocumentMoniker": "Models\\Response\\ClsMemberResponse.cs",
+              "ToolTip": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Models\\Response\\ClsMemberResponse.cs",
+              "RelativeToolTip": "Models\\Response\\ClsMemberResponse.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-24T06:57:22.96Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "ClsBookResponse.cs",
+              "DocumentMoniker": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Models\\Response\\ClsBookResponse.cs",
+              "RelativeDocumentMoniker": "Models\\Response\\ClsBookResponse.cs",
+              "ToolTip": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Models\\Response\\ClsBookResponse.cs",
+              "RelativeToolTip": "Models\\Response\\ClsBookResponse.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-24T06:57:27.506Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
+              "ToolTip": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "Controllers\\AuthController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-24T06:50:47.658Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
+              "ToolTip": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "Controllers\\HomeController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-24T06:50:48.273Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "ClsSqlConnection.cs",
+              "DocumentMoniker": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Models\\DBConnection\\ClsSqlConnection.cs",
+              "RelativeDocumentMoniker": "Models\\DBConnection\\ClsSqlConnection.cs",
+              "ToolTip": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\Models\\DBConnection\\ClsSqlConnection.cs",
+              "RelativeToolTip": "Models\\DBConnection\\ClsSqlConnection.cs",
+              "ViewState": "AQIAAB8AAAAAAAAAAAAwwBwAAABlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-24T06:49:31.315Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "LMS_RUPP",
+              "DocumentMoniker": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\LMS_RUPP.csproj",
+              "RelativeDocumentMoniker": "LMS_RUPP.csproj",
+              "ToolTip": "D:\\SODA-IT\\Rupp\\Project\\LMS-Csharp\\LMS_RUPP.csproj",
+              "RelativeToolTip": "LMS_RUPP.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-05-24T06:49:16.014Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

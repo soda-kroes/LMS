@@ -1,0 +1,279 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Index";
+}
+@*link data table*@
+
+@*DataTables CSS*@
+<link href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css" rel="stylesheet" >
+<link href="~/web/ViewUser.css" rel="stylesheet" />
+@*DataTables JS*@
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+
+<style>
+    .txtTitle {
+        font-family: "Jersey 25", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        color: black;
+        font-size: 22px;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <!-- Page Heading -->
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <div class="mb-0 text-gray-800"> <img src="~/assets/images/icons8-dashboard-48.png" style="width:25px; height:25px; margin-bottom:5px;" /> <span style="color:grey">Dashboard</span> <i class="fa-solid fa-angles-right" style="color:grey"></i> <span style="color:grey">User</span></div>
+                <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm text-light" data-target="#idFormUser" data-toggle="modal">
+                    <i class="fa-solid fa-user-plus fa-sm text-white-50"></i> New User
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="table-responsive">
+            <div class="row">
+                <div class="col-sm-12">
+                    <table id="idUserView" class="table table-bordered table-sm table-hover" style="width:100%;">
+                        <thead class="text-center">
+                            <tr>
+                                <th>No</th>
+                               @* <th>IDCARD</th>*@
+                                <th>USERNAME</th>
+                                <th>PASSWORD</th>
+                                <th>TELL</th>
+                                <th>ROLE</th>
+                                <th>LOCK</th>
+                                <th>CHANGE</th>
+                                <th>CREATE DATE</th>
+                                <th>CREATE BY</th>
+                                <th>STATUS</th>
+                                <th>ACTION</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@*----------------------------------------------------------Create Insert PopUp Form----------------------------------------------------------*@
+<div class="modal fade" id="idFormUser" tabindex="-1" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><img src="~/assets//images//icons8-add-user-50.png" /><span class="txtTitle" style="margin-top:10px;">Create User</span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="need-novalidate-new" novalidate>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div>
+                                Id Card
+                                <input id="txtIdCard" type="text" class="form-control" required />
+                                <div class="invalid-feedback">Id Card is required</div>
+                            </div>
+                            <div style="margin-top:10px;">
+                                User Name
+                                <input id="txtUsername" type="text" class="form-control" required />
+                                <div class="invalid-feedback">Username is required</div>
+                            </div>
+                            <div style="margin-top:10px;">
+                                Tell
+                                <input id="txtTell" type="text" class="form-control" required />
+                                <div class="invalid-feedback">Tell is required</div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div>
+                                Password
+                                <input id="txtPassword" type="text" class="form-control" value="LMS123" readonly />
+                            </div>
+                            <div style="margin-top:10px;">
+                                Role
+                                <select class="form-control" id="ddlRole">
+                                    <option value="A">Admin</option>
+                                    <option value="U" selected>User</option>
+                                </select>
+                            </div>
+                            <div style="margin-top:10px;">
+                                Status
+                                <select class="form-control" id="ddlStatus" disabled>
+                                    <option value="A" selected>Active</option>
+                                    <option value="I">Inactive</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@*----------------------------------------------------------Create Insert PopUp Form----------------------------------------------------------*@
+
+<script type="text/javascript">
+
+    //GET DATA
+    $('#idUserView').DataTable({
+        data: Users,
+        columns: [
+            {
+                render: function (data, type, full, meta) { return meta.row + 1; }
+            },
+            //{ data: "idCard" },
+            { data: "username" },
+            { data: "password" },
+            { data: "tell" },
+            { data: "role" },
+            { data: "locked" },
+            { data: "change" },
+            { data: "createDateStr" },
+            { data: "createBy" },
+            {
+                data: "status",
+                render: function (data, type, full, meta) {
+                    var colorClass = "";
+                    if (data == "Active") {
+                        colorClass = "badge-success";
+                    } else {
+                        colorClass = "badge-danger";
+                    }
+                    return '<span style="padding:3px;" class="badge ' + colorClass + '">' + data + '</span>';
+                }
+            },
+            {
+                render: function (data, type, full, meta) {
+                    return '<a href="#" style="margin-right: 10px; color:#ff4d4d; font-size:14px;" onclick="remove(' + full.idcard + ')"><i class="fas fa-trash"></i></a>' + '<a style="font-size:14px;" href="#" onclick="edit(' + full.idcard + ')"><i class="fa-regular fa-pen-to-square"></i></a>'
+                }
+            }
+        ]
+    });
+
+    var table = $('#idUserView').DataTable();
+    var Users = [];
+    function getData() {
+       // showLoading();
+        $.ajax({
+            url: '@Url.Action("GetUser","User")',
+            type: "GET",
+            dataType: "JSON",
+            success: function (response) {
+                if (response.errCode == 0) {
+                    console.log(response);
+                    // hideLoading();
+                    Users = [];
+                    Users = response.users;
+
+                    table.clear();
+                    table.rows.add(Users);
+                    table.draw();
+                } else {
+
+                }
+            }
+        });
+    }
+    getData();
+
+
+     // Hold screen to validation
+    var form = document.getElementsByClassName('need-novalidate-new');
+    var validation = Array.prototype.filter.call(form, function (forms) {
+        forms.addEventListener('submit', function (event) {
+            if (forms.checkValidity() == false) {
+                event.preventDefault();
+            }
+            else {
+                event.preventDefault();
+                var obj = {};
+                obj.IdCard = $('#txtIdCard').val();
+                obj.Username = $('#txtUsername').val();
+                obj.Tell = $('#txtTell').val();
+                obj.Role = $('#ddlRole').val();
+
+                $('#idFormUser').modal('hide');
+                showLoading();
+
+                $.ajax({
+                    url: '@Url.Action("PostUser","User")',
+                    type: "POST",
+                    dataType: "JSON",//OK
+                    data: { user: obj },
+                    success: function (response) {
+                        if (response.errCode == 0) {
+                            setTimeout(function () {
+                                hideLoading();
+                                Toast.fire({
+                                    icon: 'success',
+                                    title: response.errMsg
+                                })
+                                getData();
+
+                                // Reset the form
+                                forms.reset();
+                                forms.classList.remove('was-validated');    
+                            }, 2000);// Delay modal
+                        }
+                        else if (response.errCode == 1) {
+                            hideLoading();
+                            Toast.fire({
+                                icon: 'error',
+                                title: response.errMsg
+                            })
+                        }
+                        else {
+                            hideLoading();
+                            Toast.fire({
+                                icon: 'error',
+                                title: response.errMsg
+                            })
+                        }
+                    },
+                });
+            }
+            forms.classList.add('was-validated');
+        }, false);
+    });
+
+
+    //------------------------------------- For Loading -------------------------------
+    function showLoading() {
+        var loadingIndicatorOverlay = document.createElement('div');
+        loadingIndicatorOverlay.classList.add('loading-indicator-overlay');
+
+        var loadingIndicator = document.createElement('div');
+        loadingIndicator.classList.add('loading-indicator');
+
+        var loadingText = document.createElement('div');
+        loadingText.classList.add('loading-text');
+        loadingText.textContent = 'Please wait...';
+
+        loadingIndicatorOverlay.appendChild(loadingIndicator);
+        loadingIndicatorOverlay.appendChild(loadingText);
+        document.body.appendChild(loadingIndicatorOverlay);
+
+        return true;
+    }
+
+    function hideLoading() {
+        var loadingIndicator = document.querySelector('.loading-indicator-overlay');
+        if (loadingIndicator) {
+            loadingIndicator.remove();
+        }
+    }
+
+</script>

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34916.146
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LMS_RUPP", "LMS_RUPP.csproj", "{15BDCC05-8B2B-422D-967B-3C2006D93C09}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{15BDCC05-8B2B-422D-967B-3C2006D93C09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15BDCC05-8B2B-422D-967B-3C2006D93C09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15BDCC05-8B2B-422D-967B-3C2006D93C09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15BDCC05-8B2B-422D-967B-3C2006D93C09}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FF3F17E4-37A1-4144-BAAD-A8E6F6DF8BE7}
+	EndGlobalSection
+EndGlobal

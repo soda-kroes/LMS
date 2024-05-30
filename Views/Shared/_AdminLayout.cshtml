@@ -1,0 +1,299 @@
+﻿@using Microsoft.AspNetCore.Http;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>LMS - Dashboard</title>
+
+    <link href="~/assets/fontawesome-free-6.5.2-web/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/assets/jquery/jquery-3.7.1.min.js"></script>
+
+
+    <!-- Custom styles for this template-->
+    <link href="~/dash/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Jersey+25&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/Calendar/css/style.css">
+
+
+    <script src="~/js/admin.js"></script>
+    <script src="https://cdn.logwork.com/widget/text.js"></script>
+
+    <!-- Add SweetAlert files -->
+    <link href="~/Assets/Sweetalert/sweetalert2.min.css" rel="stylesheet" />
+    <script src="~/Assets/Sweetalert/sweetalert2.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+</head>
+<style>
+    .txt1 {
+        font-family: "Jersey 25", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        color: black;
+        font-size: 20px;
+    }
+    .sidebar-dark .nav-item .nav-link[data-toggle=collapse]::after {
+        color: gray;
+    }
+</style>
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-light sidebar sidebar-dark accordion" id="accordionSidebar">
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+                <div class="sidebar-brand-icon">
+                    <img src="~/assets/images/admin.png" style="height:50px; width:50px;" />
+                </div>
+                <div class="sidebar-brand-text text-black-50 mx-1">Admin</div>
+            </a>
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="~/AdminDash/Index">
+                    <i class="fas fa-fw fa-tachometer-alt text-black-50"></i>
+                    <span class="text-black-50">Dashboard</span>
+                </a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+            <!-- Heading -->
+            <div class="sidebar-heading text-black-50">
+                Library Mangement
+            </div>
+
+            <!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link" href="~/AdminDash/ViewBook">
+                    <i class="fa-solid fa-check-double fa-chart-area text-black-50"></i>
+                    <span class="text-black-50">List Books</span>
+                </a>
+            </li>
+            <!-- Nav Item - Charts -->
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                   aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench text-black-50"></i>
+                    <span class="text-black-50">Request</span>
+                </a>
+
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                     data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Request Action:</h6>
+                        <a class="collapse-item" href="~/AdminDash/BorrowBook">Borrow Book</a>
+                        <a class="collapse-item" href="~/AdminDash/ReturnBook">Return Book</a>
+
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="~/AdminDash/ReportBook">
+                    <i class="fa-solid fa-check-double fa-chart-area text-black-50"></i>
+                    <span class="text-black-50">Report Books</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="~/AdminDash/ViewMember">
+                    <i class="fa-solid fa-users  text-black-50"></i>
+                    <span class="text-black-50">Members</span>
+                </a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+            <!-- Heading -->
+            <div class="sidebar-heading text-black-50">
+                User Management
+            </div>
+            <!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link" href="~/User/ViewUser">
+                    <i class="fa-solid fa-users  text-black-50"></i>
+                    <span class="text-black-50">Admin</span>
+                </a>
+            </li>
+
+
+        </ul>
+        <!-- End of Sidebar -->
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <div style="display:flex">
+                        <div class="text-center d-none d-md-inline " style="margin-right:20px;">
+                            <button class="border-0 d-sm-inline-block btn btn-sm bg-light" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+                        </div>
+
+                        <div><img src="~/assets/images/rupp_logo.png" style="height:40px; width:40px" /></div>
+                        <div class="txt1" style="margin-left:10px; margin-top:3px;">RUPP - Library</div>
+                    </div>
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <div class="topbar-divider d-none d-sm-block"></div>
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">@HttpContextAccessor.HttpContext.Session.GetString("UserName")</span>
+                                <img class="img-profile rounded-circle"
+                                     src="/assets/images/icons8-user-60.png" style="height:35px; width:35px;">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                 aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#" data-target="#idFormProfile" data-toggle="modal" >
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Profile
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Change Password
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a asp-controller="Auth" asp-action="Logout" class="dropdown-item">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- End of Topbar -->
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <main role="main" class="pb-3">
+                        @RenderBody()
+                    </main>
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- End of Main Content -->
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Develop By Group3</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+        </div>
+        <!-- End of Content Wrapper -->
+    </div>
+
+
+    @*----------------------------------------------------------Create Insert PopUp Form----------------------------------------------------------*@
+    <div class="modal fade" id="idFormProfile" tabindex="-1" role="dialog" data-backdrop="static">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"> <img src="~/assets/images/icons8-user-60.png" /> <span class="txt1">Profile Detail</span></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="need-novalidate-new" novalidate>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div>
+                                    <div class="txt1">Id Card</div>
+                                    <input id="txtIdCard" type="text" class="form-control" readonly />
+                                </div>
+                                <div style="margin-top:10px;">
+                                    <div class="txt1">User Name</div>
+                                    <input id="txtUsername" type="text" class="form-control" readonly />
+                                </div>
+                                <div style="margin-top:10px;">
+                                    <div class="txt1">Tell</div>
+                                    <input id="txtTell" type="text" class="form-control" readonly />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div>
+                                    <div class="txt1">Create Date</div>
+                                    <input id="txtPassword" type="text" class="form-control"  readonly />
+                                </div>
+                                <div style="margin-top:10px;">
+                                    <div class="txt1">Role</div>
+                                    <input id="txtRole" type="text" class="form-control" readonly />
+                                </div>
+                                <div style="margin-top:10px;">
+                                    <div class="txt1">Status</div>
+                                    <input id="txtStatus" type="text" class="form-control" readonly />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*----------------------------------------------------------Create Insert PopUp Form----------------------------------------------------------*@
+
+    <!-- Scroll to Top Button-->
+    <a id="scrollToTop" class="scroll-to-top rounded" href="#page-top">
+        <i class="fa-solid fa-jet-fighter-up"></i>
+    </a>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/dash/js/sb-admin-2.min.js"></script>
+    <script src="~/Calendar/js/popper.js"></script>
+    <script src="~/Calendar/js/main.js"></script>
+    <script>
+        $(document).ready(function () {
+            //sweatalert
+            window.Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: function (toast) {
+                    toast.addEventListener('mouseenter', Swal.stopTimer);
+                    toast.addEventListener('mouseleave', Swal.resumeTimer);
+                },
+            });
+        })
+        document.addEventListener('DOMContentLoaded', function () {
+            var scrollToTop = document.getElementById('scrollToTop');
+            // Show the scroll-to-top button when the user scrolls down
+            window.addEventListener('scroll', function () {
+                if (window.pageYOffset > 100) {
+                    scrollToTop.style.display = 'block';
+                } else {
+                    scrollToTop.style.display = 'none';
+                }
+            });
+
+            // Scroll to the top of the page when the button is clicked
+            scrollToTop.addEventListener('click', function (e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
