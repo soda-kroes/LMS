@@ -475,11 +475,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\SODA.IT\\Rupp_Y3\\MyProject\\C#\\LMS-Csharp\\LMS_RUPP.csproj",
+      "projectUniqueName": "D:\\SODA.IT\\Rupp_Y3\\MyProject\\C#\\LMS\\LMS_RUPP.csproj",
       "projectName": "LMS_RUPP",
-      "projectPath": "D:\\SODA.IT\\Rupp_Y3\\MyProject\\C#\\LMS-Csharp\\LMS_RUPP.csproj",
+      "projectPath": "D:\\SODA.IT\\Rupp_Y3\\MyProject\\C#\\LMS\\LMS_RUPP.csproj",
       "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-      "outputPath": "D:\\SODA.IT\\Rupp_Y3\\MyProject\\C#\\LMS-Csharp\\obj\\",
+      "outputPath": "D:\\SODA.IT\\Rupp_Y3\\MyProject\\C#\\LMS\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",

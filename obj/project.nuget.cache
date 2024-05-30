@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "khjVSqd9RComF6cwC+L4VaMWLfPH1A6nHkUbqT4LrL/7uSs02PoHO/FVjehSeiB+URvXHvCgdsy03/t7Ms0W3g==",
+  "dgSpecHash": "ko3S3hCu6pNhoFn1Pv70rATeDUZ4NNBHZ8usNiwa2n5zWWxFQdR3DepyIXiiZDQbfrdK0liJdwz3YreMheff5g==",
   "success": true,
-  "projectFilePath": "D:\\SODA.IT\\Rupp_Y3\\MyProject\\C#\\LMS-Csharp\\LMS_RUPP.csproj",
+  "projectFilePath": "D:\\SODA.IT\\Rupp_Y3\\MyProject\\C#\\LMS\\LMS_RUPP.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ASUS\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\ASUS\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
