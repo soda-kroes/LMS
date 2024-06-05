@@ -54,7 +54,6 @@
                                         <th>DATE BORROW</th>
                                         <th>DATE RETURN</th>
                                         <th>PURPOSE</th>
-                                        <th>STATUS</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -81,19 +80,8 @@
             { data: "bookId" },
             { data: "dateBorrowStr" },
             { data: "dateReturnStr" },
-            { data: "purpose" },
-            {
-                data: "statusStr",
-                render: function (data, type, full, meta) {
-                    var colorClass = "";
-                    if (data == "Return") {
-                        colorClass = "badge-success";
-                    } else {
-                        colorClass = "badge-danger";
-                    }
-                    return '<span style="padding:3px;" class="badge ' + colorClass + '">' + data + '</span>';
-                }
-            }
+            { data: "purpose" }
+            
         ]
     });
 

@@ -42,7 +42,7 @@
                         <thead class="text-center">
                             <tr>
                                 <th>No</th>
-                               @* <th>IDCARD</th>*@
+                                <th>IDCARD</th>
                                 <th>USERNAME</th>
                                 <th>PASSWORD</th>
                                 <th>TELL</th>
@@ -50,7 +50,6 @@
                                 <th>LOCK</th>
                                 <th>CHANGE</th>
                                 <th>CREATE DATE</th>
-                                <th>CREATE BY</th>
                                 <th>STATUS</th>
                                 <th>ACTION</th>
                             </tr>
@@ -115,7 +114,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="submit" id="btnSaveUser" class="btn btn-primary">Save</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </form>
@@ -124,6 +123,68 @@
     </div>
 </div>
 @*----------------------------------------------------------Create Insert PopUp Form----------------------------------------------------------*@
+
+@*----------------------------------------------------------Create Update PopUp Form----------------------------------------------------------*@
+<div class="modal fade" id="idFormUserUpdate" tabindex="-1" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><img src="~/assets//images//icons8-add-user-50.png" /><span class="txtTitle" style="margin-top:10px;">Update User</span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="need-novalidate-new-update" novalidate>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div>
+                                Id Card
+                                <input id="txtIdCardUpdate" type="text" class="form-control" required readonly />
+                                <div class="invalid-feedback">Id Card is required</div>
+                            </div>
+                            <div style="margin-top:10px;">
+                                User Name
+                                <input id="txtUsernameUpdate" type="text" class="form-control" required />
+                                <div class="invalid-feedback">Username is required</div>
+                            </div>
+                            <div style="margin-top:10px;">
+                                Tell
+                                <input id="txtTellUpdate" type="text" class="form-control" required />
+                                <div class="invalid-feedback">Tell is required</div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div>
+                                Password
+                                <input id="txtPasswordUpdate" type="text" class="form-control" value="LMS123" readonly />
+                            </div>
+                            <div style="margin-top:10px;">
+                                Role
+                                <select class="form-control" id="ddlRoleUpdate">
+                                    <option value="A">Admin</option>
+                                    <option value="U">User</option>
+                                </select>
+                            </div>
+                            <div style="margin-top:10px;">
+                                Status
+                                <select class="form-control" id="ddlStatusUpdate">
+                                    <option value="A">Active</option>
+                                    <option value="I">Inactive</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="btnUpdateUser" class="btn btn-primary">Update</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@*----------------------------------------------------------Create Update PopUp Form----------------------------------------------------------*@
 
 <script type="text/javascript">
 
@@ -134,7 +195,7 @@
             {
                 render: function (data, type, full, meta) { return meta.row + 1; }
             },
-            //{ data: "idCard" },
+            { data: "idCard" },
             { data: "username" },
             { data: "password" },
             { data: "tell" },
@@ -142,7 +203,6 @@
             { data: "locked" },
             { data: "change" },
             { data: "createDateStr" },
-            { data: "createBy" },
             {
                 data: "status",
                 render: function (data, type, full, meta) {
@@ -157,7 +217,7 @@
             },
             {
                 render: function (data, type, full, meta) {
-                    return '<a href="#" style="margin-right: 10px; color:#ff4d4d; font-size:14px;" onclick="remove(' + full.idcard + ')"><i class="fas fa-trash"></i></a>' + '<a style="font-size:14px;" href="#" onclick="edit(' + full.idcard + ')"><i class="fa-regular fa-pen-to-square"></i></a>'
+                    return '<a href="#" style="margin-right: 10px; color:#ff4d4d; font-size:14px;" onclick="remove(' + full.idCard + ')"><i class="fas fa-trash"></i></a>' + '<a style="font-size:14px;" href="#" onclick="edit(' + full.idCard + ')"><i class="fa-regular fa-pen-to-square"></i></a>'
                 }
             }
         ]
@@ -199,51 +259,188 @@
             }
             else {
                 event.preventDefault();
-                var obj = {};
-                obj.IdCard = $('#txtIdCard').val();
-                obj.Username = $('#txtUsername').val();
-                obj.Tell = $('#txtTell').val();
-                obj.Role = $('#ddlRole').val();
 
-                $('#idFormUser').modal('hide');
-                showLoading();
+                var submitButtonId = event.submitter.id;
+                if(submitButtonId == "btnSaveUser"){
+                    var obj = {};
+                    obj.IdCard = $('#txtIdCard').val();
+                    obj.Username = $('#txtUsername').val();
+                    obj.Tell = $('#txtTell').val();
+                    obj.Role = $('#ddlRole').val();
 
-                $.ajax({
-                    url: '@Url.Action("PostUser","User")',
-                    type: "POST",
-                    dataType: "JSON",//OK
-                    data: { user: obj },
-                    success: function (response) {
-                        if (response.errCode == 0) {
-                            setTimeout(function () {
+                    $('#idFormUser').modal('hide');
+                    showLoading();
+
+                    $.ajax({
+                        url: '@Url.Action("PostUser","User")',
+                        type: "POST",
+                        dataType: "JSON",//OK
+                        data: { user: obj },
+                        success: function (response) {
+                            if (response.errCode == 0) {
+                                setTimeout(function () {
+                                    hideLoading();
+                                    Toast.fire({
+                                        icon: 'success',
+                                        title: response.errMsg
+                                    })
+                                    getData();
+
+                                    // Reset the form
+                                    forms.reset();
+                                    forms.classList.remove('was-validated');
+                                }, 2000);// Delay modal
+                            }
+                            else if (response.errCode == 1) {
                                 hideLoading();
                                 Toast.fire({
-                                    icon: 'success',
+                                    icon: 'error',
                                     title: response.errMsg
                                 })
-                                getData();
+                            }
+                            else {
+                                hideLoading();
+                                Toast.fire({
+                                    icon: 'error',
+                                    title: response.errMsg
+                                })
+                            }
+                        },
+                    });
+                }          
+            }
+            forms.classList.add('was-validated');
+        }, false);
+    });
 
-                                // Reset the form
-                                forms.reset();
-                                forms.classList.remove('was-validated');    
-                            }, 2000);// Delay modal
-                        }
-                        else if (response.errCode == 1) {
-                            hideLoading();
-                            Toast.fire({
-                                icon: 'error',
-                                title: response.errMsg
-                            })
-                        }
-                        else {
-                            hideLoading();
-                            Toast.fire({
-                                icon: 'error',
-                                title: response.errMsg
-                            })
+    function remove(idCard){
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '@Url.Action("DeleteUser","User")',
+                    type: "POST",
+                    dataType: "JSON",//OK
+                    data: { idCard: idCard },
+                    success: function (response) {
+                        if (response.errCode == 0) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: response.errMsg,
+                                icon: "success"
+                            });
+                            getData();
+                        }else{
+                            Swal.fire({
+                                title: "Error!",
+                                text: response.errMsg,
+                                icon: "error"
+                            });
                         }
                     },
                 });
+                
+            }
+        });
+        
+
+    }
+
+    var idCardValue;
+    function edit(ID){
+        $('#idFormUserUpdate').modal('show');
+        idCardValue = ID;
+        alert(idCardValue);
+        $.ajax({
+            url: '@Url.Action("GetUserById","User")',
+            type: "POST",
+            dataType: "JSON",//OK
+            data: {idCard: idCardValue },
+            success: function (response) {
+                if (response.errCode == 0) {
+                    $('#txtIdCardUpdate').val(response.users[0].idCard); 
+                    $('#txtUsernameUpdate').val(response.users[0].username);
+                    $('#txtTellUpdate').val(response.users[0].tell);
+                    $('#txtPasswordUpate').val(response.users[0].password);
+                    $('#ddlRoleUpdate').val(response.users[0].role);
+                    if (response.users[0].role.trim() == "User"){
+                        $('#ddlRoleUpdate').val("U");
+                    }else{
+                        $('#ddlRoleUpdate').val("A");
+                    }
+
+                } else {
+                    
+                }
+            },
+        });
+
+    }
+
+    // Hold screen to validation
+    var form = document.getElementsByClassName('need-novalidate-new-update');
+    var validation = Array.prototype.filter.call(form, function (forms) {
+        forms.addEventListener('submit', function (event) {
+            if (forms.checkValidity() == false) {
+                event.preventDefault();
+            }
+            else {
+                event.preventDefault();
+
+                var submitButtonId = event.submitter.id;
+                if (submitButtonId == "btnUpdateUser") {
+                    var obj = {};
+                    obj.Username = $('#txtUsernameUpdate').val();
+                    obj.Tell = $('#txtTellUpdate').val();
+                    obj.Role = $('#ddlRoleUpdate').val();
+
+                    $('#idFormUserUpdate').modal('hide');
+                    showLoading();
+
+                    $.ajax({
+                        url: '@Url.Action("UpdateUser","User")',
+                        type: "POST",
+                        dataType: "JSON",//OK
+                        data: { user: obj },
+                        success: function (response) {
+                            if (response.errCode == 0) {
+                                setTimeout(function () {
+                                    hideLoading();
+                                    Toast.fire({
+                                        icon: 'success',
+                                        title: response.errMsg
+                                    })
+                                    getData();
+
+                                    // Reset the form
+                                    forms.reset();
+                                    forms.classList.remove('was-validated');
+                                }, 2000);// Delay modal
+                            }
+                            else if (response.errCode == 1) {
+                                hideLoading();
+                                Toast.fire({
+                                    icon: 'error',
+                                    title: response.errMsg
+                                })
+                            }
+                            else {
+                                hideLoading();
+                                Toast.fire({
+                                    icon: 'error',
+                                    title: response.errMsg
+                                })
+                            }
+                        },
+                    });
+                }
             }
             forms.classList.add('was-validated');
         }, false);
