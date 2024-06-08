@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "IJTTkeCTvCvN0Rrb0rbbs+09yBboRDzgxuRGhkDXf7g=",
+  "Hash": "7hXeEPuCWVAK2yih4MbIBoAJFBNEier5VS9J2KZMC7w=",
   "Source": "LMS_RUPP",
   "BasePath": "_content/LMS_RUPP",
   "Mode": "Default",
@@ -37143,6 +37143,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\images\\icons8-dashboard-48.png"
+    },
+    {
+      "Identity": "D:\\SODA.IT\\Rupp_Y3\\MyProject\\C#\\LMS\\wwwroot\\assets\\images\\icons8-search-100.png",
+      "SourceId": "LMS_RUPP",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\SODA.IT\\Rupp_Y3\\MyProject\\C#\\LMS\\wwwroot\\",
+      "BasePath": "_content/LMS_RUPP",
+      "RelativePath": "assets/images/icons8-search-100.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\icons8-search-100.png"
     },
     {
       "Identity": "D:\\SODA.IT\\Rupp_Y3\\MyProject\\C#\\LMS\\wwwroot\\assets\\images\\icons8-upload-100.png",

@@ -83,7 +83,10 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title"> <img src="~/assets/images/icons8-add-book-100.png" style="width:30px; height:30px;" /><span class="txtTitle"> Add Book</span></h5>
+                <h5 class="modal-title">
+                    <img src="~/assets/images/icons8-add-book-100.png" style="width:30px; height:30px;" />
+                    <span class="txtTitle"> Add Book</span>
+                </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -114,22 +117,20 @@
                         </div>
                         <div class="col-sm-6">
                             <div style="margin-top: 30px;">
-                                @*<label>Photo</label>*@
                                 <div class="form-group">
-                                <label for="legalIdImage">
-                                    <div class="header">                                      
-                                        <img id="legalIdImageDisplay" style="cursor: pointer; height: 200px; width: 200px; border-radius:10px;"  src="~/assets/images/icons8-upload-100.png" />
-                                    </div>
-                                </label>
-                                <input accept="image/png, image/gif, image/jpeg" id="legalIdImage" required style="" type="file">
+                                    <label for="legalIdImage">
+                                        <div class="header">
+                                            <img id="legalIdImageDisplay" style="cursor: pointer; height: 200px; width: 200px; border-radius:10px;" src="~/assets/images/icons8-upload-100.png" />
+                                        </div>
+                                    </label>
+                                    <input accept="image/png, image/gif, image/jpeg" id="legalIdImage" required style="" type="file">
+                                    <div class="invalid-feedback">Image is required</div>
+                                </div>
                             </div>
-                               
-                            </div>
-                     
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="submit" id="btnSaveBook" class="btn btn-primary">Save</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </form>
@@ -138,6 +139,69 @@
     </div>
 </div>
 @*----------------------------------------------------------Create Insert PopUp Form----------------------------------------------------------*@
+
+
+@*----------------------------------------------------------Create Update PopUp Form----------------------------------------------------------*@
+<div class="modal fade" id="idFormBookUpdate" tabindex="-1" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"> <img src="~/assets/images/icons8-add-book-100.png" style="width:30px; height:30px;" /><span class="txtTitle"> Update Book</span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="need-novalidate-new-update" novalidate>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div>
+                                Book Code
+                                <input id="txtBookIdUpdate" type="text" class="form-control" required />
+                                <div class="invalid-feedback">Book Id is required</div>
+                            </div>
+                            <div style="margin-top:10px;">
+                                Title
+                                <input id="txtTitleUpdate" type="text" class="form-control" required />
+                                <div class="invalid-feedback">Title is required</div>
+                            </div>
+                            <div style="margin-top:10px;">
+                                Author
+                                <input id="txtAuthorUpdate" type="text" class="form-control" required />
+                                <div class="invalid-feedback">Author is required</div>
+                            </div>
+                            <div style="margin-top:10px;">
+                                Type Of Book
+                                <select class="form-control" id="ddlTypeOfBookUpdate"></select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div style="margin-top: 30px;">
+                                @*<label>Photo</label>*@
+                                <div class="form-group">
+                                    <label for="legalIdImageUpdate">
+                                        <div class="header">
+                                            <img id="legalIdImageDisplayUpdate" style="cursor: pointer; height: 200px; width: 200px; border-radius:10px;" src="~/assets/images/icons8-upload-100.png" />
+                                        </div>
+                                    </label>
+                                    <input accept="image/png, image/gif, image/jpeg" id="legalIdImageUpdate" style="" type="file">
+                                    <div class="invalid-feedback">Image is required</div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="btnUpdateBook" class="btn btn-primary">Update</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@*----------------------------------------------------------Create Update PopUp Form----------------------------------------------------------*@
 
 <script type="text/javascript">
 
@@ -180,7 +244,7 @@
             dataType: "JSON",
             success: function (response) {
                 if (response.errCode == 0) {
-                    console.log(response);
+                    //console.log(response);
                     // hideLoading();
                     Books = [];
                     Books = response.books;
@@ -203,7 +267,7 @@
             type: "GET",
             dataType: "JSON",
             success: function (response) {
-                console.log(response);
+                //console.log(response);
                 var ddlTypeOfBook = $('#ddlTypeOfBook');
                 ddlTypeOfBook.empty();
 
@@ -223,6 +287,7 @@
         });
     }
 
+
     getTypeOfBook();
 
     //get value typeOfBook
@@ -235,7 +300,6 @@
 
     //--------------------{hadle file image}-----------
     var images = null;
-
     function ReadImages(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
@@ -262,59 +326,245 @@
             else {
                 event.preventDefault();
 
-                var obj = {};
-                obj.BookId = $('#txtBookId').val();
-                obj.Title = $('#txtTitle').val();
-                obj.Author = $('#txtAuthor').val();
-                obj.TypeOfBookId = value_type_of_book;
-                obj.BookImage = images;
+                var submitButtonId = event.submitter.id;
+                if(submitButtonId == "btnSaveBook"){
+                    var obj = {};
+                    obj.BookId = $('#txtBookId').val();
+                    obj.Title = $('#txtTitle').val();
+                    obj.Author = $('#txtAuthor').val();
+                    obj.TypeOfBookId = value_type_of_book;
+                    obj.BookImage = images;
 
 
-                $('#idFormBook').modal('hide');
-                showLoading();
+                    $('#idFormBook').modal('hide');
+                    showLoading();
 
-                $.ajax({
-                    url: '@Url.Action("PostBook","BookJsonData")',
-                    type: "POST",
-                    dataType: "JSON",//OK
-                    data: { book: obj },
-                    success: function (response) {
-                        if (response.errCode == 0) {
-                            setTimeout(function () {
+                    $.ajax({
+                        url: '@Url.Action("PostBook","BookJsonData")',
+                        type: "POST",
+                        dataType: "JSON",//OK
+                        data: { book: obj },
+                        success: function (response) {
+                            if (response.errCode == 0) {
+                                setTimeout(function () {
+                                    hideLoading();
+                                    Toast.fire({
+                                        icon: 'success',
+                                        title: response.errMsg
+                                    })
+                                    getData();
+
+
+                                    // Reset the form
+                                    forms.reset();
+                                    forms.classList.remove('was-validated');
+                                }, 2000);// Delay modal
+                            }
+                            else if (response.errCode == 1) {
                                 hideLoading();
                                 Toast.fire({
-                                    icon: 'success',
+                                    icon: 'error',
                                     title: response.errMsg
                                 })
-                                getData();
-
-
-                                // Reset the form
-                                forms.reset();
-                                forms.classList.remove('was-validated');
-                            }, 2000);// Delay modal
-                        }
-                        else if (response.errCode == 1) {
-                            hideLoading();
-                            Toast.fire({
-                                icon: 'error',
-                                title: response.errMsg
-                            })
-                        }
-                        else {
-                            hideLoading();
-                            Toast.fire({
-                                icon: 'error',
-                                title: response.errMsg
-                            })
-                        }
-                    },
-                });
+                            }
+                            else {
+                                hideLoading();
+                                Toast.fire({
+                                    icon: 'error',
+                                    title: response.errMsg
+                                })
+                            }
+                        },
+                    });
+                }
             }
             forms.classList.add('was-validated');
         }, false);
     });
 
+    function remove(BookId) {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '@Url.Action("DeleteBook","BookJsonData")',
+                    type: "POST",
+                    dataType: "JSON",//OK
+                    data: { bookId: BookId },
+                    success: function (response) {
+                        if (response.errCode == 0) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: response.errMsg,
+                                icon: "success"
+                            });
+                            getData();
+                        } else {
+                            Swal.fire({
+                                title: "Error!",
+                                text: response.errMsg,
+                                icon: "error"
+                            });
+                        }
+                    },
+                });
+
+            }
+        });
+
+    }
+
+
+    function getTypeOfBookUpdate() {
+        $.ajax({
+            url: "/MasterData/GetTypeOfBook",
+            type: "GET",
+            dataType: "JSON",
+            success: function (response) {
+                //console.log(response);
+                var ddlTypeOfBookUpdate = $('#ddlTypeOfBookUpdate');
+                ddlTypeOfBookUpdate.empty();
+
+                var defaultOption = new Option('----- Choose One ------', '');
+                defaultOption.disabled = true; // Disable the option
+                defaultOption.selected = true; // Select the option
+                ddlTypeOfBookUpdate.append(defaultOption);
+
+                for (var i = 0; i < response.typeOfBooks.length; i++) {
+                    var typeofBook = response.typeOfBooks[i];
+                    var optionValue = typeofBook.id;
+                    var option = new Option(typeofBook.name, optionValue);
+                    ddlTypeOfBookUpdate.append(option);
+                }
+                ddlTypeOfBookUpdate.val('');
+            }
+        });
+    }
+    getTypeOfBookUpdate();
+
+    //get value typeOfBook
+    var value_type_of_book_update;
+    var imagesUpdate; 
+    var valueBookId;
+    function edit(ID) {
+        $('#idFormBookUpdate').modal('show');
+        valueBookId = ID;
+        //alert(valueBookId);
+        $.ajax({
+            url: '@Url.Action("GetBookById","BookJsonData")',
+            type: "POST",
+            dataType: "JSON",
+            data: { bookId: valueBookId },
+            success: function (response) {
+                if (response.errCode == 0) {
+                    console.log(response);
+                    $('#txtBookIdUpdate').val(response.books[0].bookId);
+                    $('#txtTitleUpdate').val(response.books[0].title);
+                    $('#txtAuthorUpdate').val(response.books[0].author);
+                    $('#ddlTypeOfBookUpdate').val(response.books[0].typeOfBookId);
+
+                    // Set the image source to the existing image URL
+                    $('#legalIdImageDisplayUpdate').attr('src', response.books[0].bookImage);
+
+                    value_type_of_book_update = response.books[0].typeOfBookId;
+                    imagesUpdate = response.books[0].bookImage;
+                } else {
+                    // Handle error
+                }
+            },
+        });
+    }
+
+    //--------------------{hadle file image}-----------
+    function ReadImagesUpate(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#legalIdImageDisplayUpdate').attr('src', e.target.result);
+                imagesUpdate = e.target.result;
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $('#legalIdImageUpdate').change(function () {
+        ReadImagesUpate(this);
+    });
+   
+    $("#ddlTypeOfBookUpdate").change(function () {
+        var selectOptionValue = $(this).val();
+        value_type_of_book_update = selectOptionValue;
+        //alert(value_type_of_book_update);
+    });
+
+
+
+    // Hold screen to validation
+    var form = document.getElementsByClassName('need-novalidate-new-update');
+    var validation = Array.prototype.filter.call(form, function (forms) {
+        forms.addEventListener('submit', function (event) {
+            if (forms.checkValidity() == false) {
+                event.preventDefault();
+            } else {
+                event.preventDefault();
+
+                var submitButtonId = event.submitter.id;
+                if (submitButtonId == "btnUpdateBook") {
+
+                    var obj = {};
+                    obj.BookId = $('#txtBookIdUpdate').val();
+                    obj.Title = $('#txtTitleUpdate').val();
+                    obj.Author = $('#txtAuthorUpdate').val();
+                    obj.TypeOfBookId = value_type_of_book_update;
+                    obj.BookImage = imagesUpdate;
+
+                  
+
+                    console.log("soda" + JSON.stringify(obj));
+
+                    $('#idFormBookUpdate').modal('hide');
+                    showLoading();
+
+                    $.ajax({
+                        url: '@Url.Action("UpdateBook","BookJsonData")',
+                        type: "POST",
+                        dataType: "JSON",
+                        data: { book: obj },
+                        success: function (response) {
+                            if (response.errCode == 0) {
+                                setTimeout(function () {
+                                    hideLoading();
+                                    Toast.fire({
+                                        icon: 'success',
+                                        title: response.errMsg
+                                    })
+                                    getData();
+
+                                    // Reset the form
+                                    forms.reset();
+                                    forms.classList.remove('was-validated');
+                                }, 2000); // Delay modal
+                            } else {
+                                hideLoading();
+                                Toast.fire({
+                                    icon: 'error',
+                                    title: response.errMsg
+                                })
+                            }
+                        },
+                    });
+                }
+            }
+            forms.classList.add('was-validated');
+        }, false);
+    });
 
 
 

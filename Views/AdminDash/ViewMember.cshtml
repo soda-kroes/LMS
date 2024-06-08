@@ -429,7 +429,7 @@
             success: function (response) {
                 if (response.errCode == 0) {
                     console.log(response);
-                     $('#txtIdCardUpdate').val(response.members[0].idCard);
+                    $('#txtIdCardUpdate').val(response.members[0].idCard);
                     $('#txtFirstNameUpdate').val(response.members[0].firstName);
                     $('#txtLastNameUpdate').val(response.members[0].lastName);
                     $('#ddlGenderUpdate').val(response.members[0].gender);

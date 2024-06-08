@@ -144,7 +144,6 @@ namespace LMS_RUPP.Controllers
                     foreach (DataRow row in table.Rows)
                     {
                         obj = new ClsMember();
-                        obj.Id = Convert.ToInt32(row["Id"].ToString());
                         obj.IdCard = Convert.ToInt32(row["IdCard"].ToString());
                         obj.FirstName = row["FirstName"].ToString();
                         obj.LastName = row["LastName"].ToString();

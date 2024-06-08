@@ -62,9 +62,9 @@ namespace LMS_RUPP.Controllers
                 try
                 {
                     DataTable table = new DataTable();
-                    string query = @"SELECT *, CASE WHEN Status = 1 THEN 'Borrow' ELSE 'Return' END AS StatusStr FROM [dbo].[tblRequest] WHERE UserId = @UserId";
+                    string query = @"SELECT *, CASE WHEN Status = 1 THEN 'Borrow' ELSE 'Return' END AS StatusStr FROM [dbo].[tblRequest] WHERE MemberId = @MemberId";
                     con._Ad = new SqlDataAdapter(query, con._Con);
-                    con._Ad.SelectCommand.Parameters.AddWithValue("@UserId", UserId);
+                    con._Ad.SelectCommand.Parameters.AddWithValue("@MemberId", UserId);
                     con._Ad.Fill(table);
                     foreach (DataRow row in table.Rows)
                     {

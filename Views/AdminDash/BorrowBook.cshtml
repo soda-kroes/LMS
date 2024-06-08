@@ -368,8 +368,6 @@
             data: { UserId: USERID },
             success: function (response) {
                 if (response.errCode == 0) {
-                    console.log(response);
-                    // hideLoading();
                     Datas = [];
                     Datas = response.historyRequests;
 
@@ -541,7 +539,7 @@
                         var row = $(this);
                         var no = row.find('td:eq(0)').text();
                         var bookId = row.find('td:eq(1)').text();
-                        obj.UserId = $('#ddlIdCard').val();
+                        obj.MemberId = $('#ddlIdCard').val();
                         obj.DateBorrowStr = $('#txtBorrowDate').val();
                         obj.DateReturnStr = $('#txtReturnDate').val();
                         obj.Purpose = $("#txtPurpose").val();
@@ -577,6 +575,12 @@
                                     forms.reset();
                                     forms.classList.remove('was-validated');
                                 }, 2000);// Delay modal
+                            }else{
+                                hideLoading();
+                                Toast.fire({
+                                    icon: 'error',
+                                    title: response.errMsg
+                                })
                             }
                         },
                         error: function (error) {

@@ -13,7 +13,7 @@ namespace LMS_RUPP.Controllers
 {
     public class ReportJsonDataController : Controller
     {
-        public IActionResult GetBookReport()
+        public IActionResult GetBookReport(string fromDate, string toDate, string status)
         {
             ClsSqlConnection con = new ClsSqlConnection();
             ClsBookReportResponse response = new ClsBookReportResponse();
@@ -25,25 +25,48 @@ namespace LMS_RUPP.Controllers
 
                 try
                 {
+                    string query;
                     DataTable table = new DataTable();
-                    string query = "REPORT_BOOK";
-                    con._Ad = new SqlDataAdapter(query, con._Con);
+                    con._Ad = new SqlDataAdapter("", con._Con); // Initialize SqlDataAdapter
+
+                    if (!string.IsNullOrEmpty(fromDate) && !string.IsNullOrEmpty(toDate))
+                    {
+                        query = "REPORT_BOOK1";
+                        con._Ad.SelectCommand.CommandText = query;
+                        con._Ad.SelectCommand.Parameters.AddWithValue("@fromDate", fromDate);
+                        con._Ad.SelectCommand.Parameters.AddWithValue("@toDate", toDate);
+                    }
+                    else if (!string.IsNullOrEmpty(status))
+                    {
+                        query = "REPORT_BOOK2";
+                        con._Ad.SelectCommand.CommandText = query;
+                        con._Ad.SelectCommand.Parameters.AddWithValue("@Status", status);
+                    }
+                    else
+                    {
+                        query = "REPORT_BOOK";
+                        con._Ad.SelectCommand.CommandText = query;
+                    }
+
                     con._Ad.SelectCommand.CommandType = CommandType.StoredProcedure;
                     con._Ad.Fill(table);
+
                     foreach (DataRow row in table.Rows)
                     {
                         obj = new ClsBookReport();
-                        obj.Id = Convert.ToInt32(row["Id"].ToString());
-                        obj.UserId = Convert.ToInt32(row["UserId"].ToString()); 
-                        obj.BookId = Convert.ToInt32(row["BookId"].ToString());
+                        obj.MemberId = Convert.ToInt32(row["MemberId"]);
+                        obj.BookId = Convert.ToInt32(row["BookId"]);
                         obj.DateBorrow = Convert.ToDateTime(row["DateBorrow"]);
                         obj.DateBorrowStr = FormateDate.ClientFormatDate(obj.DateBorrow);
                         obj.DateReturn = Convert.ToDateTime(row["DateReturn"]);
                         obj.DateReturnStr = FormateDate.ClientFormatDate(obj.DateReturn);
                         obj.Purpose = row["Purpose"].ToString();
                         obj.StatusStr = row["StatusStr"].ToString();
+                        obj.MemberName = row["MemberName"].ToString();
+                        obj.BookName = row["Title"].ToString();
                         list.Add(obj);
                     }
+
                     response.ErrCode = 0;
                     response.ErrMsg = "Success";
                     response.BookReports = list.ToList();
@@ -53,7 +76,6 @@ namespace LMS_RUPP.Controllers
                     response.ErrCode = ex.HResult;
                     response.ErrMsg = ex.Message;
                 }
-
             }
 
             return Ok(response);
