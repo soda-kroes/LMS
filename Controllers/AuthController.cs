@@ -55,7 +55,7 @@ namespace LMS_RUPP.Controllers
                         obj.Status = row["Status"].ToString();
                         obj.Tell = row["Tell"].ToString();
                         obj.ExpiredDate = Convert.ToDateTime(row["ExpiredDate"].ToString());
-                        HttpContext.Session.SetString("UserName", obj.Username); // Set the session with the user's name
+                        HttpContext.Session.SetString("UserCode", obj.IdCard); // Set the session with the user's name
                     }
                     if (find)
                     {
@@ -79,11 +79,11 @@ namespace LMS_RUPP.Controllers
                         {
                             response.ErrCode = 4;
                             response.ErrMsg = "";
-                            HttpContext.Session.SetString("tmpCode", Username);
+                            HttpContext.Session.SetString("tmpCode", obj.IdCard);
                         }
                         else
                         {
-                            HttpContext.Session.SetString("Code", Username);
+                            HttpContext.Session.SetString("Code", obj.IdCard);
                             response.ErrCode = 0;
                             response.ErrMsg = "Login Successfully";
                         }

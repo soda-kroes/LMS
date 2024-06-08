@@ -210,5 +210,76 @@ namespace LMS_RUPP.Controllers
 
             return Ok(response);
         }
+
+        public IActionResult DeleteMember(int memberId)
+        {
+            ClsSqlConnection con = new ClsSqlConnection();
+            StatusResponse response = new StatusResponse();
+            if (con._ErrCode == 0)
+            {
+                try
+                {
+                    string Query = "DELETE [dbo].[tblMember] WHERE IdCard = @memberId";
+                    con._Cmd = new SqlCommand(Query, con._Con);
+                    con._Cmd.Parameters.AddWithValue("@memberId", memberId);
+                    con._Cmd.ExecuteNonQuery();
+
+                    response.ErrCode = 0;
+                    response.ErrMsg = "User Delete Success.";
+                }
+                catch (Exception ex)
+                {
+                    response.ErrCode = ex.HResult;
+                    response.ErrMsg = ex.Message;
+                }
+
+            }
+            else
+            {
+                response.ErrCode = con._ErrCode;
+                response.ErrMsg = con._ErrMsg;
+
+            }
+            return Ok(response);
+        }
+
+        public IActionResult UpdateMember(ClsMember objMember)
+        {
+            ClsSqlConnection con = new ClsSqlConnection();
+            StatusResponse response = new StatusResponse();
+            objMember.DateOfBirth = ((DateTime)FormateDate.ServerFormatDate(objMember.DateOfBirthStr)).Date;
+            if (con._ErrCode == 0)
+            {
+                if(objMember.StatusStr == "A")
+                {
+                    objMember.Status = 1;
+                }
+                else { objMember.Status = 0; }
+                try
+                {
+                    con._Cmd = new SqlCommand("UPDATE_Member", con._Con);
+                    con._Cmd.CommandType = CommandType.StoredProcedure;
+                    con._Cmd.Parameters.AddWithValue("@IdCard", objMember.IdCard);
+                    con._Cmd.Parameters.AddWithValue("@FirstName", objMember.FirstName);
+                    con._Cmd.Parameters.AddWithValue("@LastName", objMember.LastName);
+                    con._Cmd.Parameters.AddWithValue("@Gender", objMember.Gender);
+                    con._Cmd.Parameters.AddWithValue("@DateOfBirth", objMember.DateOfBirthStr);
+                    con._Cmd.Parameters.AddWithValue("@Email", objMember.Email);
+                    con._Cmd.Parameters.AddWithValue("@Tell", objMember.Tell);
+                    con._Cmd.Parameters.AddWithValue("@Status", objMember.Status);
+                    con._Cmd.Parameters.AddWithValue("@Address", objMember.Address);
+                    con._Cmd.ExecuteNonQuery();
+
+                    response.ErrCode = 0;
+                    response.ErrMsg = "User update success.";
+                }
+                catch (Exception ex)
+                {
+                    response.ErrCode = ex.HResult;
+                    response.ErrMsg = ex.Message;
+                }
+            }
+            return Ok(response);
+        }
     }
 }

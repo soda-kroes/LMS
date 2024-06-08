@@ -217,7 +217,7 @@
             },
             {
                 render: function (data, type, full, meta) {
-                    return '<a href="#" style="margin-right: 10px; color:#ff4d4d; font-size:14px;" onclick="remove(' + full.idCard + ')"><i class="fas fa-trash"></i></a>' + '<a style="font-size:14px;" href="#" onclick="edit(' + full.idCard + ')"><i class="fa-regular fa-pen-to-square"></i></a>'
+                    return '<a href="#" style="margin-right: 10px; color:#ff4d4d; font-size:14px;" onclick="remove(' + full.idCard + ')"><i class="fas fa-trash"></i></a>' + '<a style="font-size:14px; margin-right: 10px;" href="#" onclick="edit(' + full.idCard + ')"><i class="fa-regular fa-pen-to-square"></i></a>' + '<a style="font-size:14px;" href="#" onclick="resetPassword(' + full.idCard + ')"><i class="fa-solid fa-key"></i></a>';
                 }
             }
         ]
@@ -365,6 +365,7 @@
             data: {idCard: idCardValue },
             success: function (response) {
                 if (response.errCode == 0) {
+                    console.log(response);
                     $('#txtIdCardUpdate').val(response.users[0].idCard); 
                     $('#txtUsernameUpdate').val(response.users[0].username);
                     $('#txtTellUpdate').val(response.users[0].tell);
@@ -376,12 +377,42 @@
                         $('#ddlRoleUpdate').val("A");
                     }
 
+                    $('#ddlStatusUpdate').val(response.users[0].status);
+                    if (response.users[0].status.trim() == "Inactive") {
+                        $('#ddlStatusUpdate').val("I");
+                    } else {
+                        $('#ddlStatusUpdate').val("A");
+                    }
+
                 } else {
                     
                 }
             },
         });
 
+    }
+
+    function resetPassword(UserId){
+        alert(UserId);
+        $.ajax({
+            url: '@Url.Action("ResetPassword","User")',
+            type: "POST",
+            dataType: "JSON",//OK
+            data: { idCard: UserId },
+            success: function (response) {
+                if (response.errCode == 0) {
+                    console.log(response);
+                    Toast.fire({
+                        icon: 'success',
+                        title: response.errMsg
+                    })
+                    getData();
+
+                } else {
+
+                }
+            },
+        });
     }
 
     // Hold screen to validation
@@ -397,9 +428,11 @@
                 var submitButtonId = event.submitter.id;
                 if (submitButtonId == "btnUpdateUser") {
                     var obj = {};
+                    obj.IdCard = idCardValue;
                     obj.Username = $('#txtUsernameUpdate').val();
                     obj.Tell = $('#txtTellUpdate').val();
                     obj.Role = $('#ddlRoleUpdate').val();
+                    obj.Status = $("#ddlStatus").val();
 
                     $('#idFormUserUpdate').modal('hide');
                     showLoading();
@@ -423,13 +456,6 @@
                                     forms.reset();
                                     forms.classList.remove('was-validated');
                                 }, 2000);// Delay modal
-                            }
-                            else if (response.errCode == 1) {
-                                hideLoading();
-                                Toast.fire({
-                                    icon: 'error',
-                                    title: response.errMsg
-                                })
                             }
                             else {
                                 hideLoading();

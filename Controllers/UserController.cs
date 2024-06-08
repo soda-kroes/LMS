@@ -250,5 +250,33 @@ namespace LMS_RUPP.Controllers
             }
             return Ok(response);
         }
+
+        public IActionResult ResetPassword(int  idCard)
+        {
+            ClsSqlConnection con = new ClsSqlConnection();
+            StatusResponse response = new StatusResponse();
+            DateTime dt = DateTime.Now;
+            if (con._ErrCode == 0)
+            {
+                try
+                {
+                    con._Cmd = new SqlCommand("UPDATE [dbo].[tblUser] SET Password = @password , Change = @change, ExpiredDate= @expiredDate WHERE IdCard = @idCard ", con._Con);
+                    con._Cmd.Parameters.AddWithValue("@idCard", idCard);
+                    con._Cmd.Parameters.AddWithValue("@password", "LMS123");
+                    con._Cmd.Parameters.AddWithValue("@change", "N");
+                    con._Cmd.Parameters.AddWithValue("@expiredDate", dt.AddDays(1));
+                    con._Cmd.ExecuteNonQuery();
+
+                    response.ErrCode = 0;
+                    response.ErrMsg = "Password reset success.";
+                }
+                catch (Exception ex)
+                {
+                    response.ErrCode = ex.HResult;
+                    response.ErrMsg = ex.Message;
+                }
+            }
+            return Ok(response);
+        }
     }
 }
