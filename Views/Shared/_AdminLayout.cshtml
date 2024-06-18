@@ -111,19 +111,26 @@
                     <span class="text-black-50">Members</span>
                 </a>
             </li>
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-            <!-- Heading -->
-            <div class="sidebar-heading text-black-50">
-                User Management
-            </div>
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="~/User/ViewUser">
-                    <i class="fa-solid fa-users  text-black-50"></i>
-                    <span class="text-black-50">Admin</span>
-                </a>
-            </li>
+
+
+            @if (@HttpContextAccessor.HttpContext?.Session?.GetString("Role") == "A")
+            {
+                <hr class="sidebar-divider">
+
+                <div class="sidebar-heading text-black-50">
+                    User Management
+                </div>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="~/User/ViewUser">
+                        <i class="fa-solid fa-users text-black-50"></i>
+                        <span class="text-black-50">Admin</span>
+                    </a>
+                </li>
+            }
+
+           
+            
 
 
         </ul>

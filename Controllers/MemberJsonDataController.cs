@@ -94,7 +94,6 @@ namespace LMS_RUPP.Controllers
                     foreach (DataRow row in table.Rows)
                     {
                         obj = new ClsMember();
-                        obj.Id = Convert.ToInt32(row["Id"].ToString());
                         obj.IdCard = Convert.ToInt32(row["IdCard"].ToString());
                         obj.FirstName = row["FirstName"].ToString();
                         obj.LastName = row["LastName"].ToString();
@@ -186,13 +185,15 @@ namespace LMS_RUPP.Controllers
                 try
                 {
                     DataTable table = new DataTable();
-                    string query = "SELECT IdCard FROM [LMS].[dbo].[tblMember]";
+                    string query = "SELECT IdCard, FirstName, LastName FROM [LMS].[dbo].[tblMember]";
                     con._Ad = new SqlDataAdapter(query, con._Con);
                     con._Ad.Fill(table);
                     foreach (DataRow row in table.Rows)
                     {
                         obj = new ClsMember();
                         obj.IdCard = Convert.ToInt32(row["IdCard"].ToString());
+                        obj.FirstName = row["FirstName"].ToString();
+                        obj.LastName = row["LastName"].ToString() ;
                         list.Add(obj);
                     }
                     response.ErrCode = 0;

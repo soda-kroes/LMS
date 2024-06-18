@@ -94,5 +94,115 @@ namespace LMS_RUPP.Controllers
             return Ok(response);
         }
 
+        public IActionResult DashBoardCount()
+        {
+            ClsSqlConnection con = new ClsSqlConnection();
+            DashboardResponse response = new DashboardResponse();
+
+            if (con._ErrCode == 0)
+            {
+                try
+                {
+                    List<Dashboard> list = new List<Dashboard>();
+
+                    string[] DashboardCount = new string[2];
+                    string query = @"SELECT COUNT(Gender) AS male, (SELECT COUNT(Gender) FROM [dbo].[tblMember] WHERE Gender = 'Female') AS female FROM [dbo].[tblMember] WHERE Gender = 'Male'";
+                    con._Ad = new SqlDataAdapter(query, con._Con);
+                    DataTable dt = new DataTable();
+                    con._Ad.Fill(dt);
+
+                    if (dt.Rows.Count == 0)
+                    {
+                        DashboardCount[0] = "0";
+                        DashboardCount[1] = "0";
+                    }
+                    else
+                    {
+                        DashboardCount[0] = dt.Rows[0]["male"].ToString();
+                        DashboardCount[1] = dt.Rows[0]["female"].ToString();
+                    }
+
+                    Dashboard obj = new Dashboard();
+                    obj.MaleCount = DashboardCount[0];
+                    obj.FemaleCount = DashboardCount[1];
+                    list.Add(obj);
+
+                    response.ErrCode = 0;
+                    response.ErrMsg = "Success";
+                    response.Dashboards = list;
+
+                    return Ok(response);
+                }
+                catch (Exception ex)
+                {
+                    response.ErrCode = -1;
+                    response.ErrMsg = ex.Message;
+                }
+            }
+
+            return BadRequest(response);
+        }
+
+        public IActionResult CountMember()
+        {
+            ClsSqlConnection con = new ClsSqlConnection();
+            MemberCountResponse response = new MemberCountResponse();
+
+            if (con._ErrCode == 0)
+            {
+                try
+                {
+                    string query = @"SELECT COUNT(*) AS MemberAmount FROM [LMS].[dbo].[tblMember]";
+                    con._Ad = new SqlDataAdapter(query, con._Con);
+                    DataTable dt = new DataTable();
+                    con._Ad.Fill(dt);
+
+                    if (dt.Rows.Count > 0)
+                    {
+                        response.MemberAmount = Convert.ToInt32(dt.Rows[0]["MemberAmount"]);
+                    }
+
+                    return Ok(response);
+                }
+                catch (Exception ex)
+                {
+                    response.ErrCode = -1;
+                    response.ErrMsg = ex.Message;
+                }
+            }
+
+            return BadRequest(response);
+        }
+
+        public IActionResult CountTypeOfBook()
+        {
+            ClsSqlConnection con = new ClsSqlConnection();
+            CountTypeBookResponse response = new CountTypeBookResponse();
+
+            if (con._ErrCode == 0)
+            {
+                try
+                {
+                    string query = @"SELECT COUNT(*) AS TypeOfBookCount FROM [LMS].[dbo].[tblTypeOfBook]";
+                    con._Ad = new SqlDataAdapter(query, con._Con);
+                    DataTable dt = new DataTable();
+                    con._Ad.Fill(dt);
+
+                    if (dt.Rows.Count > 0)
+                    {
+                        response.TypeOfbook = Convert.ToInt32(dt.Rows[0]["TypeOfBookCount"]);
+                    }
+
+                    return Ok(response);
+                }
+                catch (Exception ex)
+                {
+                    response.ErrCode = -1;
+                    response.ErrMsg = ex.Message;
+                }
+            }
+
+            return BadRequest(response);
+        }
     }
 }

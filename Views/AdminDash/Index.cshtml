@@ -3,6 +3,10 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewData["Title"] = "LoginPage";
 }
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
 <div class="container">
     <div class="row">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -10,15 +14,17 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-xl-3 col-md-6 mb-4">
+        <div class="col-xl-6 col-md-6 mb-4">
             <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                               Borrowed Books
+                               Total Memebers
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">200</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <span id="idCountMember"></span>
+                            </div>
                         </div>
                         <div class="col-auto">
                             <i class="fa-solid fa-book fa-2x text-gray-300"></i> 
@@ -29,15 +35,17 @@
         </div>
 
 
-        <div class="col-xl-3 col-md-6 mb-4">
+        <div class="col-xl-6 col-md-6 mb-4">
             <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                               Returned Book
+                               Total Type Of Books
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <span id="idcountTypeOfBook"></span>
+                            </div>
                         </div>
                         <div class="col-auto">
                             <i class="fa-solid fa-rotate-left fa-2x text-gray-300"></i>
@@ -46,65 +54,161 @@
                 </div>
             </div>
         </div>
+        </div>
 
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-info shadow h-100 py-2">
+
+    <div class="row mt-2 ml-2">
+        <div class="col-6">
+            <div class="card" style="border-radius:30px; height:500px; width:500px;">
                 <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                Total Books
+                    <figure class="highcharts-figure">
+                        <div id="containerChart"></div>
+                    </figure>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-6">
+            <div class="card" style="border-radius:30px; height:500px; width:500px;">
+                <div class="card-body" >
+                    <div class="col-md-12">
+                        <div class="calendar calendar-first" id="calendar_first">
+                            <div class="calendar_header">
+                                <button class="switch-month switch-left"> <i class="fa fa-chevron-left"></i></button>
+                                <h2></h2>
+                                <button class="switch-month switch-right"> <i class="fa fa-chevron-right"></i></button>
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fa-solid fa-arrow-up-wide-short fa-2x text-gray-300"></i>
+                            <div class="calendar_weekdays"></div>
+                            <div class="calendar_content"></div>
                         </div>
                     </div>
                 </div>
+
             </div>
+
         </div>
-
-
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-danger shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                                Pending Request
-                            </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fa-solid fa-hourglass-start fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-    <div class="row mt-2">
-        <div class="col-md-6">
-            <div class="calendar calendar-first" id="calendar_first">
-                <div class="calendar_header">
-                    <button class="switch-month switch-left"> <i class="fa fa-chevron-left"></i></button>
-                    <h2></h2>
-                    <button class="switch-month switch-right"> <i class="fa fa-chevron-right"></i></button>
-                </div>
-                <div class="calendar_weekdays"></div>
-                <div class="calendar_content"></div>
-            </div>
-        </div>
-        <div class="col-md-6" style="margin-top:100px;">
-            <a href="https://logwork.com/current-time-in-phnom-penh-cambodia" class="clock-widget-text" data-timezone="Asia/Phnom_Penh" data-language="en">Phnom Penh, Cambodia</a>
-        </div>
-
-
+      
     </div>
 
 
 </div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+       
+        CountMember();
+        CountTypeOfBook();
+
+        $.ajax({
+            type: "POST",
+            url: "/MasterData/DashBoardCount",
+            data: JSON.stringify({}),
+            contentType: "application/json; charset=utf-8", // Corrected content type
+            dataType: "json",
+            success: function (response) {
+                var values = response.dashboards;
+                console.log(JSON.stringify(values));
+                var maleCount = parseInt(values[0].maleCount); // Access the count using index
+                var femaleCount = parseInt(values[0].femaleCount); // Access the count using index
+
+
+                Highcharts.chart('containerChart', {
+                    chart: {
+                        type: 'pie'
+                    },
+                    title: {
+                        text: 'Member'
+                    },
+                    tooltip: {
+                        valueSuffix: ''
+                    },
+                    credits: {
+                        enabled: false
+                    },
+
+                    plotOptions: {
+                        series: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: [{
+                                enabled: true,
+                                distance: 20
+                            }, {
+                                enabled: true,
+                                distance: -40,
+                                format: '{point.percentage:.1f}%',
+                                // format: '{point.y}',
+                                style: {
+                                    fontSize: '1.2em',
+                                    textOutline: 'none',
+                                    opacity: 0.7
+                                },
+                                filter: {
+                                    operator: '>',
+                                    property: 'percentage',
+                                    value: 10
+                                }
+                            }]
+                        }
+                    },
+                    series: [
+                        {
+                            data: [
+                                {
+                                    name: 'Male',
+                                    y: maleCount
+                                },
+                                {
+                                    name: 'Female',
+                                    sliced: true,
+                                    selected: true,
+                                    y: femaleCount
+                                }
+
+                            ]
+                        }
+                    ]
+                });
+            }
+        });
+    });
+
+    function CountMember(){
+        $.ajax({
+            type: "POST",
+            url: "/MasterData/CountMember",
+            data: JSON.stringify({}),
+            contentType: "application/json; charset=utf-8", // Corrected content type
+            dataType: "json",
+            success: function (response) {
+                if(response.errCode == 0){
+                    console.log(response)
+                    var count = response.memberAmount;
+                    $("#idCountMember").text(count);
+                }
+            }
+        });
+    }
+
+    function CountTypeOfBook() {
+        $.ajax({
+            type: "POST",
+            url: "/MasterData/CountTypeOfBook",
+            data: JSON.stringify({}),
+            contentType: "application/json; charset=utf-8", // Corrected content type
+            dataType: "json",
+            success: function (response) {
+                if (response.errCode == 0) {
+                    console.log(response)
+                    var count = response.typeOfbook;
+                    $("#idcountTypeOfBook").text(count);
+                }
+            }
+        });
+    }
+    
+
+
+
+</script>

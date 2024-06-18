@@ -168,7 +168,8 @@
                 for (var i = 0; i < response.members.length; i++) {
                     var Data = response.members[i];
                     var optionValue = Data.idCard;
-                    var option = new Option(optionValue, optionValue);
+                    var optionTEXT = Data.idCard + ' - ' + Data.firstName + ' ' + Data.lastName; // Concatenate the
+                    var option = new Option(optionTEXT, optionValue);
                     ddlIdCard.append(option);
                 }
                 ddlIdCard.val('');
@@ -263,10 +264,20 @@
             success: function (response) {
                 console.log(response);
                 if (response.errCode == 0) {
-                    alert(1);
+                    Swal.fire({
+                        title: "Thanks You!",
+                        text: "Book Return Success!",
+                        icon: "success"
+                    });
                     // Clear the existing data in the table
                     getBookBorrowByUserId(valueOfIDcard)
 
+                }else{
+                    Swal.fire({
+                        title: "Bad Requeest!",
+                        text: response.errMsg,
+                        icon: "error"
+                    });
                 }
             }
         });

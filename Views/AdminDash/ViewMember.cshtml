@@ -420,7 +420,7 @@
     function edit(ID) {
         $('#idFormMemberUpdate').modal('show');
         memeberIdCard = ID;
-        alert(memeberIdCard);
+        //alert(memeberIdCard);
         $.ajax({
             url: '@Url.Action("GetMemberByIDcard","MemberJsonData")',
             type: "POST",
@@ -465,7 +465,7 @@
 
                 var submitButtonId = event.submitter.id;
                 if (submitButtonId == "btnUpdateMember") {
-                    alert(1111);
+                    //alert(1111);
                     var obj = {};
                     obj.IdCard = $('#txtIdCardUpdate').val();
                     obj.FirstName = $('#txtFirstNameUpdate').val();

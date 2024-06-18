@@ -35,11 +35,11 @@
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <div class="mb-0 text-gray-800"> <img src="~/assets/images/icons8-dashboard-48.png" style="width:25px; height:25px; margin-bottom:5px;" /> <span style="color:grey">Dashboard</span> <i class="fa-solid fa-angles-right" style="color:grey"></i> <span style="color:grey">Report</span></div>
                 <div>
-                    <a class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm text-light" id="exportExcelBtn">
-                        <i class="fa-solid fa-user-plus fa-sm text-white-50"></i> Export Excel
+                    <a class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm text-light" id="exportExcelBtn">
+                        <i class="fa-solid fa-file-excel fa-sm text-white-50"></i> Export Excel
                     </a>
                     <a class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm text-light" id="exportPdfBtn">
-                        <i class="fa-solid fa-user-plus fa-sm text-white-50"></i> Export PDF
+                        <i class="fa-solid fa-file-pdf fa-sm text-white-50"></i> Export PDF
                     </a>
                 </div>
             </div>
@@ -63,40 +63,47 @@
                         <option value="1">Borrow</option>
                         <option value="0">Return</option>
                     </select>
-                    <a href="#" id="btnLoadRPT">
-                        <img src="~/assets/images/icons8-search-100.png" style="width:45px; height:45px;" />
-                    </a>
-                  
+                    <button class="btn btn-primary btn-sm ml-2" id="btnLoadRPT">
+                        <i class="fa-solid fa-filter"></i> Filter
+                    </button>
+                    <button class="btn btn-danger btn-sm ml-2" id="btnClear">
+                        <i class="fa-solid fa-eraser"></i> Clear
+                    </button>
+                    @* <a href="#" id="btnLoadRPT">
+                    <img src="~/assets/images/icons8-search-100.png" style="width:45px; height:45px;" />
+                    </a>*@
+
+
                 </div>
             </div>
         </div>
-        </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="table-responsive">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <table id="idReportBookView" class="table table-striped table-bordered table-sm table-hover" style="width:100%;">
-                                <thead class="text-center">
-                                    <tr>
-                                        <th>No</th>
-                                        <th>MEMBER ID</th>
-                                        <th>MEMBER NAME</th>
-                                        <th>BOOK ID</th>
-                                        <th>BOOK NAME</th>
-                                        <th>DATE BORROW</th>
-                                        <th>DATE RETURN</th>
-                                        <th>PURPOSE</th>
-                                        <th>STATUS</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="table-responsive">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table id="idReportBookView" class="table table-striped table-bordered table-sm table-hover" style="width:100%;">
+                            <thead class="text-center">
+                                <tr>
+                                    <th>No</th>
+                                    <th>MEMBER ID</th>
+                                    <th>MEMBER NAME</th>
+                                    <th>BOOK ID</th>
+                                    <th>BOOK NAME</th>
+                                    <th>DATE BORROW</th>
+                                    <th>DATE RETURN</th>
+                                    <th>PURPOSE</th>
+                                    <th>STATUS</th>
+                                </tr>
+                            </thead>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 
 <script type="text/javascript">
@@ -121,15 +128,15 @@
                 render: function (data, type, full, meta) {
                     var colorClass = "";
                     if (data == "Return") {
-                        colorClass = "badge-danger";
-                    } else {
                         colorClass = "badge-success";
+                    } else {
+                        colorClass = "badge-danger";
                     }
                     return '<span style="padding:3px;" class="badge ' + colorClass + '">' + data + '</span>';
                 }
             },
 
-            
+
         ]
     });
 
@@ -138,10 +145,9 @@
     $("#ddlStatus").change(function () {
         var selectOptionValue = $(this).val();
         ddlStatusValue = selectOptionValue;
-        alert(ddlStatusValue);
     });
 
-    $("#btnLoadRPT").click(function (){
+    $("#btnLoadRPT").click(function () {
         var fromDate = $("#fdate").val();
         var toDate = $("#tdate").val();
         getData(fromDate, toDate, ddlStatusValue);
@@ -150,7 +156,7 @@
 
     var table = $('#idReportBookView').DataTable();
     var DataReports = [];
-    function getData(fdate='',tdate='',ddlStatus='') {
+    function getData(fdate = '', tdate = '', ddlStatus = '') {
         // showLoading();
         $.ajax({
             url: '@Url.Action("GetBookReport","ReportJsonData")',
@@ -208,7 +214,7 @@
                             cell.fill = {
                                 type: "pattern",
                                 pattern: "solid",
-                                fgColor: { argb: "FF808080" }
+                                fgColor: { argb: "ffc04d" }
                             };
                             cell.font = {
                                 bold: true
@@ -225,7 +231,7 @@
                                 item.bookId,
                                 item.bookName,
                                 item.dateBorrowStr,
-                                item.DateReturnStr,
+                                item.dateReturnStr,
                                 item.purpose,
                                 item.statusStr
                             ];
@@ -241,7 +247,7 @@
                                     maxLength = columnLength;
                                 }
                             });
-                            column.width = maxLength + 2; 
+                            column.width = maxLength + 2;
                         });
 
                         // Set content alignment to center
@@ -344,8 +350,14 @@
     }
     getData();
 
-  
+    $('#btnClear').click(function () {
+        $("#fdate").val("");
+        $("#tdate").val("");
+        $("#ddlStatus").val("");
+        ddlStatusValue = null;
 
+        getData();
+    })
 
 
 

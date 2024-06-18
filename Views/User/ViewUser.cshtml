@@ -249,6 +249,11 @@
     }
     getData();
 
+    // Listen for the input event on the txtUsername textbox
+    $('#txtUsername').on('input', function () {
+        var currentValue = $(this).val();
+        $(this).val(currentValue.toUpperCase());
+    });
 
      // Hold screen to validation
     var form = document.getElementsByClassName('need-novalidate-new');
@@ -264,7 +269,7 @@
                 if(submitButtonId == "btnSaveUser"){
                     var obj = {};
                     obj.IdCard = $('#txtIdCard').val();
-                    obj.Username = $('#txtUsername').val();
+                    obj.Username = $('#txtUsername').val().toUpperCase();
                     obj.Tell = $('#txtTell').val();
                     obj.Role = $('#ddlRole').val();
 
@@ -357,7 +362,7 @@
     function edit(ID){
         $('#idFormUserUpdate').modal('show');
         idCardValue = ID;
-        alert(idCardValue);
+        //alert(idCardValue);
         $.ajax({
             url: '@Url.Action("GetUserById","User")',
             type: "POST",
@@ -434,6 +439,12 @@
         
     }
 
+    // Listen for the input event on the txtUsername textbox
+    $('#txtUsernameUpdate').on('input', function () {
+        var currentValue = $(this).val();
+        $(this).val(currentValue.toUpperCase());
+    });
+
     // Hold screen to validation
     var form = document.getElementsByClassName('need-novalidate-new-update');
     var validation = Array.prototype.filter.call(form, function (forms) {
@@ -448,7 +459,7 @@
                 if (submitButtonId == "btnUpdateUser") {
                     var obj = {};
                     obj.IdCard = idCardValue;
-                    obj.Username = $('#txtUsernameUpdate').val();
+                    obj.Username = $('#txtUsernameUpdate').val().toUpperCase();
                     obj.Tell = $('#txtTellUpdate').val();
                     obj.Role = $('#ddlRoleUpdate').val();
                     obj.Status = $("#ddlStatus").val();

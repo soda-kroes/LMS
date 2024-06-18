@@ -25,31 +25,43 @@ namespace LMS_RUPP.Controllers
 
                 try
                 {
-                    string query;
-                    DataTable table = new DataTable();
-                    con._Ad = new SqlDataAdapter("", con._Con); // Initialize SqlDataAdapter
-
-                    if (!string.IsNullOrEmpty(fromDate) && !string.IsNullOrEmpty(toDate))
+                    string query = "REPORT_BOOK";
+                    if (!string.IsNullOrEmpty(fromDate) && !string.IsNullOrEmpty(toDate) && string.IsNullOrEmpty(status))
                     {
                         query = "REPORT_BOOK1";
-                        con._Ad.SelectCommand.CommandText = query;
-                        con._Ad.SelectCommand.Parameters.AddWithValue("@fromDate", fromDate);
-                        con._Ad.SelectCommand.Parameters.AddWithValue("@toDate", toDate);
                     }
-                    else if (!string.IsNullOrEmpty(status))
+                    else if (string.IsNullOrEmpty(fromDate) && string.IsNullOrEmpty(toDate) && !string.IsNullOrEmpty(status))
                     {
                         query = "REPORT_BOOK2";
-                        con._Ad.SelectCommand.CommandText = query;
-                        con._Ad.SelectCommand.Parameters.AddWithValue("@Status", status);
                     }
-                    else
+                    else if (!string.IsNullOrEmpty(fromDate) && !string.IsNullOrEmpty(toDate) && !string.IsNullOrEmpty(status))
                     {
-                        query = "REPORT_BOOK";
-                        con._Ad.SelectCommand.CommandText = query;
+                        query = "REPORT_BOOK3";
                     }
 
-                    con._Ad.SelectCommand.CommandType = CommandType.StoredProcedure;
-                    con._Ad.Fill(table);
+                    DataTable table = new DataTable();
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(query, con._Con))
+                    {
+                        adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+                        if (!string.IsNullOrEmpty(fromDate) && !string.IsNullOrEmpty(toDate) && string.IsNullOrEmpty(status))
+                        {
+                            adapter.SelectCommand.Parameters.AddWithValue("@fromDate", fromDate);
+                            adapter.SelectCommand.Parameters.AddWithValue("@toDate", toDate);
+                        }
+                        else if (string.IsNullOrEmpty(fromDate) && string.IsNullOrEmpty(toDate) && !string.IsNullOrEmpty(status))
+                        {
+                            adapter.SelectCommand.Parameters.AddWithValue("@Status", status);
+                        }
+                        else if (!string.IsNullOrEmpty(fromDate) && !string.IsNullOrEmpty(toDate) && !string.IsNullOrEmpty(status))
+                        {
+                            adapter.SelectCommand.Parameters.AddWithValue("@fromDate", fromDate);
+                            adapter.SelectCommand.Parameters.AddWithValue("@toDate", toDate);
+                            adapter.SelectCommand.Parameters.AddWithValue("@status", status);
+                        }
+
+                        adapter.Fill(table);
+                    }
 
                     foreach (DataRow row in table.Rows)
                     {
@@ -69,7 +81,7 @@ namespace LMS_RUPP.Controllers
 
                     response.ErrCode = 0;
                     response.ErrMsg = "Success";
-                    response.BookReports = list.ToList();
+                    response.BookReports = list;
                 }
                 catch (Exception ex)
                 {

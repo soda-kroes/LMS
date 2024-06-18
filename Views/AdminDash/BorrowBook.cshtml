@@ -287,7 +287,7 @@
             type: "GET",
             dataType: "JSON",
             success: function (response) {
-                //console.log(response);
+                console.log(response);
                 var ddlIdCard = $('#ddlIdCard');
                 ddlIdCard.empty();
 
@@ -297,7 +297,8 @@
                 for (var i = 0; i < response.members.length; i++) {
                     var Data = response.members[i];
                     var optionValue = Data.idCard;
-                    var option = new Option(optionValue, optionValue);
+                    var optionTEXT = Data.idCard + ' - ' + Data.firstName + ' ' + Data.lastName; // Concatenate the
+                    var option = new Option(optionTEXT, optionValue);
                     ddlIdCard.append(option);
                 }
                 ddlIdCard.val('');
@@ -387,7 +388,7 @@
     $("#ddlIdCard").change(function () {
         var selectOptionValue = $(this).val();
         valueOfIDcard = selectOptionValue;
-        // alert(valueOfIDcard);
+         //alert(valueOfIDcard);
         getMemberByIDcard(valueOfIDcard);
         getHistoryRequest(valueOfIDcard)
     });
@@ -398,7 +399,7 @@
             type: "GET",
             dataType: "JSON",
             success: function (response) {
-                //console.log("respoonse: " + response);
+                console.log("respoonse: " + JSON.stringify(response))
                 var ddlBookCode = $('#ddlBookCode');
                 ddlBookCode.empty();
 
@@ -410,7 +411,8 @@
                 for (var i = 0; i < response.books.length; i++) {
                     var Data = response.books[i];
                     var optionValue = Data.bookId;
-                    var option = new Option(optionValue, optionValue);
+                    var optionTEXT = Data.bookId + ' - ' + Data.title; 
+                    var option = new Option(optionTEXT, optionValue);
                     ddlBookCode.append(option);
                 }
                 ddlBookCode.val('');

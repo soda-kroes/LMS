@@ -121,6 +121,7 @@ namespace LMS_RUPP.Controllers
                     {
                         obj = new ClsBook();
                         obj.BookId = Convert.ToInt32(row["BookId"].ToString());
+                        obj.Title = row["Title"].ToString();
                         list.Add(obj);
                     }
                     response.ErrCode = 0;
